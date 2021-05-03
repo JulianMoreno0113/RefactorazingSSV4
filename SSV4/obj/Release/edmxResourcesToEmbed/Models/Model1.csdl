@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="TDoc" EntityType="Model1.TDoc" />
+    <EntitySet Name="TipoPersona" EntityType="Model1.TipoPersona" />
+    <EntitySet Name="Persona" EntityType="Model1.Persona" />
+    <AssociationSet Name="TDocPersona" Association="Model1.TDocPersona">
+      <End Role="TDoc" EntitySet="TDoc" />
+      <End Role="Persona" EntitySet="Persona" />
+    </AssociationSet>
+    <AssociationSet Name="TipoPersonaPersona" Association="Model1.TipoPersonaPersona">
+      <End Role="TipoPersona" EntitySet="TipoPersona" />
+      <End Role="Persona" EntitySet="Persona" />
+    </AssociationSet>
+    <EntitySet Name="PersonaMateria" EntityType="Model1.PersonaMateria" />
+    <EntitySet Name="Materia" EntityType="Model1.Materia" />
+    <AssociationSet Name="MateriaPersonaMateria" Association="Model1.MateriaPersonaMateria">
+      <End Role="Materia" EntitySet="Materia" />
+      <End Role="PersonaMateria" EntitySet="PersonaMateria" />
+    </AssociationSet>
+    <AssociationSet Name="PersonaPersonaMateria" Association="Model1.PersonaPersonaMateria">
+      <End Role="Persona" EntitySet="Persona" />
+      <End Role="PersonaMateria" EntitySet="PersonaMateria" />
+    </AssociationSet>
+    <EntitySet Name="NotasMateria" EntityType="Model1.NotasMateria" />
+    <AssociationSet Name="PersonaMateriaNotasMateria" Association="Model1.PersonaMateriaNotasMateria">
+      <End EntitySet="PersonaMateria" Role="PersonaMateria" />
+      <End EntitySet="NotasMateria" Role="NotasMateria" />
+    </AssociationSet>
+    <EntitySet Name="Periodo" EntityType="Model1.Periodo" />
+    <AssociationSet Name="PeriodoNotasMateria" Association="Model1.PeriodoNotasMateria">
+      <End EntitySet="Periodo" Role="Periodo" />
+      <End EntitySet="NotasMateria" Role="NotasMateria" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="TDoc">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Tipo" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Persona" Relationship="Model1.TDocPersona" FromRole="TDoc" ToRole="Persona" />
+  </EntityType>
+  <EntityType Name="TipoPersona">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+    <Property Name="Rol" Nullable="false" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Persona" Relationship="Model1.TipoPersonaPersona" FromRole="TipoPersona" ToRole="Persona" />
+  </EntityType>
+  <EntityType Name="Persona">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombres" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Apellidos" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TDoc" Relationship="Model1.TDocPersona" FromRole="Persona" ToRole="TDoc" />
+    <Property Name="TDoc_Id" Type="Int32" Nullable="false" />
+    <Property Name="NDoc" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Activo" Type="Boolean" />
+    <NavigationProperty Name="TipoPersona" Relationship="Model1.TipoPersonaPersona" FromRole="Persona" ToRole="TipoPersona" />
+    <Property Name="Tp_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="PersonaMateria" Relationship="Model1.PersonaPersonaMateria" FromRole="Persona" ToRole="PersonaMateria" />
+  </EntityType>
+  <Association Name="TDocPersona">
+    <End Type="Model1.TDoc" Role="TDoc" Multiplicity="1" />
+    <End Type="Model1.Persona" Role="Persona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TDoc">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Persona">
+        <PropertyRef Name="TDoc_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TipoPersonaPersona">
+    <End Type="Model1.TipoPersona" Role="TipoPersona" Multiplicity="1" />
+    <End Type="Model1.Persona" Role="Persona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoPersona">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Persona">
+        <PropertyRef Name="Tp_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="PersonaMateria">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Materia" Relationship="Model1.MateriaPersonaMateria" FromRole="PersonaMateria" ToRole="Materia" />
+    <Property Name="Materia_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Persona" Relationship="Model1.PersonaPersonaMateria" FromRole="PersonaMateria" ToRole="Persona" />
+    <Property Name="Persona_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="NotasMateria" Relationship="Model1.PersonaMateriaNotasMateria" FromRole="PersonaMateria" ToRole="NotasMateria" />
+  </EntityType>
+  <EntityType Name="Materia">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="PersonaMateria" Relationship="Model1.MateriaPersonaMateria" FromRole="Materia" ToRole="PersonaMateria" />
+  </EntityType>
+  <Association Name="MateriaPersonaMateria">
+    <End Type="Model1.Materia" Role="Materia" Multiplicity="1" />
+    <End Type="Model1.PersonaMateria" Role="PersonaMateria" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Materia">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonaMateria">
+        <PropertyRef Name="Materia_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PersonaPersonaMateria">
+    <End Type="Model1.Persona" Role="Persona" Multiplicity="1" />
+    <End Type="Model1.PersonaMateria" Role="PersonaMateria" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persona">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonaMateria">
+        <PropertyRef Name="Persona_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="NotasMateria">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+    <Property Name="Notas" Type="Double" />
+    <NavigationProperty Name="PersonaMateria" Relationship="Model1.PersonaMateriaNotasMateria" FromRole="NotasMateria" ToRole="PersonaMateria" />
+    <Property Name="PersonaMateriaId" Nullable="false" Type="Int32" />
+    <NavigationProperty Name="Periodo" Relationship="Model1.PeriodoNotasMateria" FromRole="NotasMateria" ToRole="Periodo" />
+    <Property Name="Periodo_Id" Nullable="false" Type="Int32" />
+  </EntityType>
+  <Association Name="PersonaMateriaNotasMateria">
+    <End Type="Model1.PersonaMateria" Multiplicity="1" Role="PersonaMateria" />
+    <End Type="Model1.NotasMateria" Multiplicity="*" Role="NotasMateria" />
+    <ReferentialConstraint>
+      <Principal Role="PersonaMateria">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NotasMateria">
+        <PropertyRef Name="PersonaMateriaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Periodo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreP" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Porcentaje" Type="Double" Nullable="false" />
+    <NavigationProperty Name="NotasMateria" Relationship="Model1.PeriodoNotasMateria" FromRole="Periodo" ToRole="NotasMateria" />
+  </EntityType>
+  <Association Name="PeriodoNotasMateria">
+    <End Type="Model1.Periodo" Multiplicity="1" Role="Periodo" />
+    <End Type="Model1.NotasMateria" Multiplicity="*" Role="NotasMateria" />
+    <ReferentialConstraint>
+      <Principal Role="Periodo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NotasMateria">
+        <PropertyRef Name="Periodo_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

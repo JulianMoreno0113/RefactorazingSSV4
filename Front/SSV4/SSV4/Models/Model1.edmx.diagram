@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a75a0a14e12345f59a16acf77fb6ef60" Name="Diagram1" ZoomLevel="146" >
+        <EntityTypeShape EntityType="Model1.TDoc" Width="1.5" PointX="4.25" PointY="1.25" />
+        <EntityTypeShape EntityType="Model1.TipoPersona" PointX="4.375" PointY="3.25" Width="1.5" />
+        <EntityTypeShape EntityType="Model1.Persona" Width="1.5" PointX="1.75" PointY="1.375" />
+        <AssociationConnector Association="Model1.TDocPersona" />
+        <AssociationConnector Association="Model1.TipoPersonaPersona" />
+        <EntityTypeShape EntityType="Model1.PersonaMateria" Width="1.5" PointX="1.875" PointY="5.125" />
+        <EntityTypeShape EntityType="Model1.Materia" Width="1.5" PointX="0.625" PointY="8.25" />
+        <AssociationConnector Association="Model1.MateriaPersonaMateria" />
+        <AssociationConnector Association="Model1.PersonaPersonaMateria" />
+        <EntityTypeShape EntityType="Model1.NotasMateria" PointX="4.875" PointY="5.875" Width="1.5" />
+        <AssociationConnector Association="Model1.PersonaMateriaNotasMateria" />
+        <EntityTypeShape EntityType="Model1.Periodo" Width="1.5" PointX="8.5" PointY="6.75" />
+        <AssociationConnector Association="Model1.PeriodoNotasMateria" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

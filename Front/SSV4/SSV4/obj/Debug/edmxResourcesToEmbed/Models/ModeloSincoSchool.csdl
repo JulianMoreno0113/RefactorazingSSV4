@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ModeloSincoSchool" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="ModeloSincoSchoolContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="TDoc" EntityType="ModeloSincoSchool.TDoc" />
+    <EntitySet Name="TipoPersona" EntityType="ModeloSincoSchool.TipoPersona" />
+    <EntitySet Name="Persona" EntityType="ModeloSincoSchool.Persona" />
+    <EntitySet Name="PersonaMateria" EntityType="ModeloSincoSchool.PersonaMateria" />
+    <EntitySet Name="Materia" EntityType="ModeloSincoSchool.Materia" />
+    <EntitySet Name="NotasMateria" EntityType="ModeloSincoSchool.NotasMateria" />
+    <EntitySet Name="Periodo" EntityType="ModeloSincoSchool.Periodo" />
+    <AssociationSet Name="TDocPersona" Association="ModeloSincoSchool.TDocPersona">
+      <End Role="TDoc" EntitySet="TDoc" />
+      <End Role="Persona" EntitySet="Persona" />
+    </AssociationSet>
+    <AssociationSet Name="TipoPersonaPersona" Association="ModeloSincoSchool.TipoPersonaPersona">
+      <End Role="TipoPersona" EntitySet="TipoPersona" />
+      <End Role="Persona" EntitySet="Persona" />
+    </AssociationSet>
+    <AssociationSet Name="PersonaPersonaMateria" Association="ModeloSincoSchool.PersonaPersonaMateria">
+      <End Role="Persona" EntitySet="Persona" />
+      <End Role="PersonaMateria" EntitySet="PersonaMateria" />
+    </AssociationSet>
+    <AssociationSet Name="MateriaPersonaMateria" Association="ModeloSincoSchool.MateriaPersonaMateria">
+      <End Role="Materia" EntitySet="Materia" />
+      <End Role="PersonaMateria" EntitySet="PersonaMateria" />
+    </AssociationSet>
+    <AssociationSet Name="PeriodoNotasMateria" Association="ModeloSincoSchool.PeriodoNotasMateria">
+      <End Role="Periodo" EntitySet="Periodo" />
+      <End Role="NotasMateria" EntitySet="NotasMateria" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="TDoc">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Tipo" Type="String" Nullable="false" />
+    <NavigationProperty Name="Persona" Relationship="ModeloSincoSchool.TDocPersona" FromRole="TDoc" ToRole="Persona" />
+  </EntityType>
+  <EntityType Name="TipoPersona">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Rol" Type="String" Nullable="false" />
+    <NavigationProperty Name="Persona" Relationship="ModeloSincoSchool.TipoPersonaPersona" FromRole="TipoPersona" ToRole="Persona" />
+  </EntityType>
+  <EntityType Name="Persona">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombres" Type="String" Nullable="false" />
+    <Property Name="Apellidos" Type="String" Nullable="false" />
+    <Property Name="NDoc" Type="String" Nullable="false" />
+    <Property Name="Activo" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="TDoc" Relationship="ModeloSincoSchool.TDocPersona" FromRole="Persona" ToRole="TDoc" />
+    <Property Name="TDocId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TipoPersona" Relationship="ModeloSincoSchool.TipoPersonaPersona" FromRole="Persona" ToRole="TipoPersona" />
+    <Property Name="Tp_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="PersonaMateria" Relationship="ModeloSincoSchool.PersonaPersonaMateria" FromRole="Persona" ToRole="PersonaMateria" />
+  </EntityType>
+  <EntityType Name="PersonaMateria">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Persona" Relationship="ModeloSincoSchool.PersonaPersonaMateria" FromRole="PersonaMateria" ToRole="Persona" />
+    <Property Name="PersonaId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Materia" Relationship="ModeloSincoSchool.MateriaPersonaMateria" FromRole="PersonaMateria" ToRole="Materia" />
+    <Property Name="MateriaId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Materia">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" />
+    <NavigationProperty Name="PersonaMateria" Relationship="ModeloSincoSchool.MateriaPersonaMateria" FromRole="Materia" ToRole="PersonaMateria" />
+  </EntityType>
+  <EntityType Name="NotasMateria">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Notas" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Periodo" Relationship="ModeloSincoSchool.PeriodoNotasMateria" FromRole="NotasMateria" ToRole="Periodo" />
+    <Property Name="PeriodoId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Periodo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreP" Type="String" Nullable="false" />
+    <Property Name="Porcentaje" Type="Double" Nullable="false" />
+    <NavigationProperty Name="NotasMateria" Relationship="ModeloSincoSchool.PeriodoNotasMateria" FromRole="Periodo" ToRole="NotasMateria" />
+  </EntityType>
+  <Association Name="TDocPersona">
+    <End Type="ModeloSincoSchool.TDoc" Role="TDoc" Multiplicity="1" />
+    <End Type="ModeloSincoSchool.Persona" Role="Persona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TDoc">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Persona">
+        <PropertyRef Name="TDocId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TipoPersonaPersona">
+    <End Type="ModeloSincoSchool.TipoPersona" Role="TipoPersona" Multiplicity="1" />
+    <End Type="ModeloSincoSchool.Persona" Role="Persona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoPersona">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Persona">
+        <PropertyRef Name="Tp_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PersonaPersonaMateria">
+    <End Type="ModeloSincoSchool.Persona" Role="Persona" Multiplicity="1" />
+    <End Type="ModeloSincoSchool.PersonaMateria" Role="PersonaMateria" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persona">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonaMateria">
+        <PropertyRef Name="PersonaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MateriaPersonaMateria">
+    <End Type="ModeloSincoSchool.Materia" Role="Materia" Multiplicity="1" />
+    <End Type="ModeloSincoSchool.PersonaMateria" Role="PersonaMateria" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Materia">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonaMateria">
+        <PropertyRef Name="MateriaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PeriodoNotasMateria">
+    <End Type="ModeloSincoSchool.Periodo" Role="Periodo" Multiplicity="1" />
+    <End Type="ModeloSincoSchool.NotasMateria" Role="NotasMateria" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Periodo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NotasMateria">
+        <PropertyRef Name="PeriodoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
