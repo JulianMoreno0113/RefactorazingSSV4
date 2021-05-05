@@ -1,6 +1,6 @@
 const tabla = document.querySelector(".tbody");
-const boton = document.getElementById("ButtonAdd");
-const btnGuardarMateria = document.getElementById("ButtonAddEditar");
+const boton = document.getElementById("btnAgregar");
+const btnGuardarMateria = document.getElementById("btnEditar");
 
 let inputNombre = document.getElementById("nombre");
 let inputApellido = document.getElementById("apellido");
@@ -25,7 +25,7 @@ boton.addEventListener("click", () => {
 	Agregar(inputNombre, inputApellido, inputTipo, inputDocumento);
 });
 console.log(window.location)
-function listarPersona() {
+function ListarPersona() {
 	fetch(urlApi+"/api/Personas/ConsultarTodo")
 		.then((response) => response.json())
 		.then((personas) =>
@@ -34,18 +34,18 @@ function listarPersona() {
 					persona.Tp_Id == 1 &&
 					htmlLocation == urlHost+"/views/alumnos.html"
 				) {
-					llenarTablaPersona(persona);
+					LlenarTablaPersona(persona);
 				} else if (
 					persona.Tp_Id == 2 &&
 					htmlLocation == urlHost+"/views/maestros.html"
 				) {
-					llenarTablaPersona(persona);
+					LlenarTablaPersona(persona);
 				}
 			})
 		);
 }
 
-function llenarTablaPersona(p) {
+function LlenarTablaPersona(p) {
 	let profe = document.createElement("tr");
 console.log(p)
 	profe.innerHTML += `<td> ${p.NDoc} </td>
@@ -54,7 +54,7 @@ console.log(p)
   <td>  ${p.TDoc_Id == 1 ? "CC" : "TI"}  </td>
   <td>  ${p.Activo ? "Activo" : "Inactivo"}  </td>`;
 	profe.innerHTML += `<td class="tdBoton ">
-  <button class="buttonEditar"onclick="AbrirEditar
+  <button class="btnEditar"onclick="AbrirEditar
 	(${p.Id},
 	${p.NDoc},
 	'${p.Nombres}',
@@ -103,7 +103,7 @@ function Agregar(nombre, apellido, tdoc, ndoc) {
 				"success"
 			);
 			response.json().then((a) => {
-				llenarTablaPersona(a);
+				LlenarTablaPersona(a);
 			});
 		}
 	});
@@ -177,7 +177,7 @@ function Editar(id, nDoc, nombres, apellidos, tDoc, estado) {
 				<td>  ${tDoc == 1 ? "CC" : "TI"}  </td>
 				<td>  ${estado == "1" ? "Activo" : "Inactivo"}  </td>
 				<td class="tdBoton ">
-				<button class="buttonEditar" onclick="AbrirEditar
+				<button class="btnEditar" onclick="AbrirEditar
 					(${id},
 					${nDoc},
 					'${nombres}',
@@ -235,5 +235,5 @@ function ConfirmarEliminar(id) {
 		}
 	});
 }
-listarPersona();
+ListarPersona();
 

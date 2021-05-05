@@ -1,12 +1,12 @@
 const tabla = document.querySelector(".tbody");
-const boton = document.getElementById("ButtonAdd");
+const boton = document.getElementById("btnAgregar");
 const inputNombre = document.getElementById("nombre");
 const inputId = document.getElementById("idPeriodo");
 const nombreEditar = document.getElementById("nombreEditar");
-const btnGuardarPeriodo = document.getElementById("ButtonAddEditar");
+const btnGuardarPeriodo = document.getElementById("btnEditar");
 const porcentajePeriodo = document.getElementById("porcentaje")
-const PorcentajeEditar=document.getElementById("PorcentajeEditar");
-let otrosporcentajes =[]
+const porcentajeEditar=document.getElementById("porcentajeEditar");
+let otrosPorcentajes =[]
 let totalArregloPorcentaje=0;
 const urlApi = "http://fercho12345-001-site1.itempurl.com";
 const urlHost = "http://localhost:52811"
@@ -24,26 +24,26 @@ boton.addEventListener("click", () => {
 	{Agregar(inputNombre.value,porcentaje.value)};
 });
 btnGuardarPeriodo.addEventListener("click", () => {
-	Editar(inputId.value, nombreEditar.value,PorcentajeEditar.value);
+	Editar(inputId.value, nombreEditar.value,porcentajeEditar.value);
 });
 
-function listarPeriodo() {
+function ListarPeriodo() {
 	fetch(urlHost+"/api/Periodoes")
 		.then((response) => response.json())
 		.then((periodos) =>
 			periodos.forEach((periodo) => {
-				llenarTabla(periodo);
+				LlenarTabla(periodo);
 			})
 		);
 }
 
-function llenarTabla(m) {
+function LlenarTabla(m) {
 	let nMateria = document.createElement("tr");
 
 	nMateria.innerHTML += `<td>${m.NombreP} </td>
 	<td>${m.Porcentaje}% </td>`;
-	otrosporcentajes.push(m.Porcentaje)
-	totalArregloPorcentaje=otrosporcentajes.reduce(function(a, b){ return a + b; })
+	otrosPorcentajes.push(m.Porcentaje)
+	totalArregloPorcentaje=otrosPorcentajes.reduce(function(a, b){ return a + b; })
 	nMateria.setAttribute("data-id", m.Id);
 	nMateria.innerHTML += `<td class="tdBoton "><button class="buttonEditar "onclick="AbrirEditar(${m.Id},'${m.NombreP}',${m.Porcentaje})">Editar</button>
     <button class=" buttonEliminar" onclick="ConfirmarEliminar(${m.Id})">Eliminar</button></td>`;
@@ -68,7 +68,7 @@ function Agregar(nombre,porcentaje) {
 				swal ( "¡Transaccion Fallida! " ,"Error Campos Vacios", "error" );
 			}else {
 				swal ( "¡Transaccion Exitosa! " , "¡Se ha agregado un nuevo Periodo! " , "success" );
-				response.json().then((response)=>llenarTabla(response))
+				response.json().then((response)=>LlenarTabla(response))
 			}
 		})
 		
@@ -78,7 +78,7 @@ function AbrirEditar(id, nombre,porcentaje) {
 	OpenUpdate();
 	inputId.value = id;
 	nombreEditar.value = nombre;
-	PorcentajeEditar.value=porcentaje
+	porcentajeEditar.value=porcentaje
 }
 
 function Editar(id, nombre,porcentaje) {
@@ -143,17 +143,17 @@ function ConfirmarEliminar(id){
 	  });
 }
 
-porcentajePeriodo.addEventListener("keyup",()=>{validarPorcentaje(porcentajePeriodo)})
+porcentajePeriodo.addEventListener("keyup",()=>{ValidarPorcentaje(porcentajePeriodo)})
 
-PorcentajeEditar.addEventListener("keyup",()=>{validarPorcentaje(PorcentajeEditar) })
-function validarPorcentaje(porcentajePeriodo){
+porcentajeEditar.addEventListener("keyup",()=>{ValidarPorcentaje(porcentajeEditar) })
+function ValidarPorcentaje(porcentajePeriodo){
   if (parseFloat(porcentajePeriodo.value) + totalArregloPorcentaje<101){
     document.getElementById("grupo__nota").classList.add("formulario__grupo-correcto");
     document.getElementById("grupo__nota").classList.remove("formulario__grupo-incorrecto");
     document.querySelector(`#grupo__nota i`).classList.add('fa-check-circle');
     document.querySelector(`#grupo__nota i`).classList.remove('fa-times-circle');
-    document.getElementById("ButtonAdd").disabled=false;
-    document.getElementById("ButtonAdd").style.backgroundColor="#023859"
+    document.getElementById("btnAgregar").disabled=false;
+    document.getElementById("btnAgregar").style.backgroundColor="#023859"
     
     
   }else{
@@ -161,11 +161,10 @@ function validarPorcentaje(porcentajePeriodo){
    document.getElementById(`grupo__nota`).classList.remove("formulario__grupo-correcto");
    document.querySelector(` #grupo__nota i`).classList.add('fa-times-circle');
    document.querySelector(`#grupo__nota i`).classList.remove('fa-check-circle'); 
-   document.getElementById("ButtonAdd").disabled=true;
-    document.getElementById("ButtonAdd").style.backgroundColor="#658294"
+   document.getElementById("btnAgregar").disabled=true;
+    document.getElementById("btnAgregar").style.backgroundColor="#658294"
    
   }
 }
 
-
-listarPeriodo();
+ListarPeriodo();
