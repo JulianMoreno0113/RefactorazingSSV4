@@ -27,10 +27,10 @@ botonAgg.addEventListener("click", () => {
 });
 
 
-function listarPeriodo() {
+function ListarPeriodo() {
 	EjecutarPeticionServidor("Periodoes","GET",null,function(periodos){
 		periodos.forEach((periodo) => {
-			llenarTabla(periodo);
+			LlenarTabla(periodo);
 		})
 	})
 }
@@ -57,7 +57,7 @@ function Agregar(nombre,porcentaje) {
 		swal("El periodo ha sido agregado correctamente", {
 			icon: "success",
 		  })
-		llenarTabla(datos)
+		LlenarTabla(datos)
 	} 
 	)
 	
