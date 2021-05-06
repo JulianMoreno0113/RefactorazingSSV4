@@ -33,15 +33,19 @@ header h1{
 }
 .datosAlumno p{
     margin-left: 5%;
-    margin-right: 40px;
+    margin-right: 5%;
 }
 .SectionTablaReporte{
     width: 70%;
-    margin: 40px auto;  
+    margin-top: 40px ;  
 }
 .TablaReporte{
     width: 100%;
     border-spacing: 0px 20px;
+}
+
+.TablaReporte th, td{
+    font-size:1.5vw;
 }
 .tbodyTabla{
     text-align: center;
@@ -69,8 +73,48 @@ header h1{
     float: right;
 }
 @media (max-width: 1000px) {
+  .datosAlumno h3,p{
+    font-size: 16px;
+    
+}
+}
+
+@media (max-width: 650px) {
     .datosAlumno{
-    width: 90%; 
+    width: 100%; 
+}
+
+.datosAlumno h3,p{
+    font-size: 2.5vw;
+    
+}
+header h1{
+    font-size:6vw;
+}
+.SectionTablaReporte{
+    width: 100%;
+    margin-top: 40px ;  
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+.TablaReporte{
+    width: 90%;
+    display:block;
+		overflow-x: x;
+}
+.TablaReporte {
+		display: block;
+		overflow-x: auto;
+	}
+
+.TablaReporte th, td{
+    font-size:0.7rem;
+}
+.tbodyTabla #info{
+   
+    padding: 20px ;
+   
 }
 
 }

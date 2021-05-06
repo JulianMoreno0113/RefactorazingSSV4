@@ -1,5 +1,5 @@
 const tabla = document.querySelector(".tbody");
-const botonAgg = document.getElementById("ButtonAdd");
+const botonAgg = document.getElementById("btnAgregar");
 const inputNombre = document.getElementById("nombre");
 const inputId = document.getElementById("idPeriodo");
 const nombreEditar = document.getElementById("nombreEditar");
@@ -8,7 +8,7 @@ const porcentajePeriodo = document.getElementById("porcentaje")
 const porcentajeEditar=document.getElementById("porcentajeEditar");
 const porcentajePeriodoNota = document.getElementById("porcentajePeriodoNota")
 const iconoPorcentajePeriodoNota = document.querySelector(`#porcentajePeriodoNota i`)
-let otrosporcentajes = []
+let otrosPorcentajes = []
 let totalArregloPorcentaje=0;
 let valorPorcentajeTemp = 0;
 const urlHost = "http://localhost:52811"
@@ -35,7 +35,7 @@ function listarPeriodo() {
 	})
 }
 
-function LlenarTabla(m) {
+function llenarTabla(m) {
 	let nMateria = document.createElement("tr");
 
 	nMateria.innerHTML += `<td>${m.NombreP} </td>
@@ -168,4 +168,4 @@ function validarPorcentaje(porcentajePeriodo){
   }
 }
 
-ListarPeriodo();
+listarPeriodo();
