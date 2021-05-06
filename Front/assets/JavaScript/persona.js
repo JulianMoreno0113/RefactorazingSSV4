@@ -1,6 +1,6 @@
 const tabla = document.querySelector(".tbody");
-const boton = document.getElementById("ButtonAdd");
-const btnGuardarMateria = document.getElementById("ButtonAddEditar");
+const boton = document.getElementById("btnAgregar");
+const btnGuardarMateria = document.getElementById("btnEditar");
 
 let inputNombre = document.getElementById("nombre");
 let inputApellido = document.getElementById("apellido");
@@ -54,8 +54,8 @@ function llenarTablaPersona(p) {
   <td>  ${p.Apellidos} </td>
   <td>  ${p.TDoc_Id == 1 ? "CC" : "TI"}  </td>
   <td>  ${p.Activo ? "Activo" : "Inactivo"}  </td>`;
-  profe.innerHTML += `<td class="tdBoton ">
-  <button class="buttonEditar"onclick="AbrirEditar
+	profe.innerHTML += `<td class="tdBoton ">
+  <button class="btnEditar"onclick="AbrirEditar
 	(${p.Id},
 	${p.NDoc},
 	'${p.Nombres}',

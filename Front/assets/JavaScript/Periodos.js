@@ -3,7 +3,7 @@ const botonAgg = document.getElementById("ButtonAdd");
 const inputNombre = document.getElementById("nombre");
 const inputId = document.getElementById("idPeriodo");
 const nombreEditar = document.getElementById("nombreEditar");
-const btnGuardarPeriodo = document.getElementById("ButtonAddEditar");
+const btnGuardarPeriodo = document.getElementById("btnEditar");
 const porcentajePeriodo = document.getElementById("porcentaje")
 const porcentajeEditar=document.getElementById("porcentajeEditar");
 const porcentajePeriodoNota = document.getElementById("porcentajePeriodoNota")
@@ -35,13 +35,13 @@ function listarPeriodo() {
 	})
 }
 
-function llenarTabla(m) {
+function LlenarTabla(m) {
 	let nMateria = document.createElement("tr");
 
 	nMateria.innerHTML += `<td>${m.NombreP} </td>
 	<td>${m.Porcentaje}% </td>`;
-	otrosporcentajes.push(m.Porcentaje)
-	totalArregloPorcentaje=otrosporcentajes.reduce(function(a, b){ return a + b; })
+	otrosPorcentajes.push(m.Porcentaje)
+	totalArregloPorcentaje=otrosPorcentajes.reduce(function(a, b){ return a + b; })
 	nMateria.setAttribute("data-id", m.Id);
 	nMateria.innerHTML += `<td class="tdBoton "><button class="buttonEditar "onclick="AbrirEditar(${m.Id},'${m.NombreP}',${m.Porcentaje})">Editar</button>
     <button class=" buttonEliminar" onclick="ConfirmarEliminar(${m.Id})">Eliminar</button></td>`;
@@ -168,5 +168,4 @@ function validarPorcentaje(porcentajePeriodo){
   }
 }
 
-
-listarPeriodo();
+ListarPeriodo();
