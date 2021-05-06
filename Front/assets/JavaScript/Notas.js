@@ -6,31 +6,25 @@ const materiaEditar = document.getElementById("materiaEditar");
 const EditarNota = document.getElementById("EditarNota");
 const periodoeditar = document.getElementById("seleccionPeriodo");
 const btnEditar = document.getElementById("ButtonEditar");
-let conteoTh=0;
 let arrayperiodos=[];
-// const urlApi = "http://fercho12345-001-site1.itempurl.com";
-const urlApi = "http://localhost:52811";
+let habilitar=false;
+
 
 
 function listarThead(url) {
-    fetch(url)
-      .then((data) => data.json())
-      .then((periodos) => {
-            theadperiodos(periodos);
-            listarNotas(periodos);
-          }
-      );
+  EjecutarPeticionServidor(url,"GET",null,function(periodos){
+    theadperiodos(periodos);
+    listarNotas(periodos);
+  })
+
   }
 
 
 
 async function listarNotas(arrayperiodos) {
-  await fetch(urlApi+"/api/Personas/alumnos/materias/notas")
-    .then((data) => data.json())
-    .then((notas) => {
-     llenarTabla(notas, arrayperiodos); 
-    })
-    .catch((error) => error);
+  await EjecutarPeticionServidor("Personas/alumnos/materias/notas","GET",null,function(notas){
+    llenarTabla(notas, arrayperiodos); 
+  })   
 }
 
 function theadperiodos(periodos) {
@@ -73,8 +67,6 @@ function llenarTabla(notas, periodos) {
     return td;
   }
    let html = " ";
-   console.log(notas)
-   console.count()
 
    for (let i = 0; i < notas.length; i++) {
       let tr = document.createElement("tr");
@@ -95,6 +87,15 @@ function llenarTabla(notas, periodos) {
               input_nota.setAttribute("class", "inputNota");
               input_nota.value = nota;
               input_nota.addEventListener('keyup',function() {
+
+                if(this.value<0||this.value >100){
+                  this.style.border='3px solid #bb2929'
+                  habilitar=false
+                }else{
+                  this.style.border='3px solid #1ed12d'
+                  habilitar=true
+                }
+
                 if(this.value != nota){
                   let cambiosActuales = JSON.parse(botonEditar.dataset.changes) ;
                   validarArray(cambiosActuales, {idNota: idnota, nota: this.value, idPM: idPM, idPeriodo: idPeriodo}); 
@@ -102,8 +103,6 @@ function llenarTabla(notas, periodos) {
                   botonEditar.disabled = false; 
 
                 }
-
-                
               })
 
               td_nota.appendChild(input_nota);
@@ -116,15 +115,20 @@ function llenarTabla(notas, periodos) {
        botonEditar.innerHTML = "Guardar";
        botonEditar.disabled=true;
        botonEditar.addEventListener('click',function(){
-        let cambios = JSON.parse(this.dataset.changes);
-           cambios.forEach(function(item){
-            if(!!item.idNota){
-              Editar(item);
-              botonEditar.disabled=true;
-            }else{
-              Agregar(item);
-            }
-           })
+         if (habilitar){
+          let cambios = JSON.parse(this.dataset.changes);
+          cambios.forEach(function(item){
+           if(!!item.idNota){
+             Editar(item);
+             botonEditar.disabled=true;
+           }else{
+             Agregar(item);
+           }
+          })
+         }else{
+           alertify.error("Rellene los datos correctamente")
+         }
+        
             
        });
 
@@ -138,41 +142,23 @@ function llenarTabla(notas, periodos) {
 }
 
 function Agregar(item) {
-  fetch(urlApi+"/api/NotasMaterias", {
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    method: "POST",
-    body: JSON.stringify({
-      Notas: item.nota,
-      PersonaMateriaId: parseInt(item.idPM),
-      Periodo_id: parseInt(item.idPeriodo)
+  EjecutarPeticionServidor("NotasMaterias","POST",{  Notas: item.nota,
+    PersonaMateriaId: parseInt(item.idPM),
+    Periodo_id: parseInt(item.idPeriodo)},function(){
+      alertify.success('Nota agregada con éxito')
     })
-  })
-    .then((response) => response.json())
 }
 
 function Editar(item) {
-  fetch(urlApi+"/api/NotasMaterias/" + item.idNota, {
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    method: "PUT",
-    body: JSON.stringify({
-      Id: parseInt(item.idNota),
-      Notas: item.nota,
-      PersonaMateriaId: parseInt(item.idPM),
-      Periodo_id: parseInt(item.idPeriodo)
+  EjecutarPeticionServidor("NotasMaterias/"+ item.idNota,"PUT",{ Id: parseInt(item.idNota),
+    Notas: item.nota,
+    PersonaMateriaId: parseInt(item.idPM),
+    Periodo_id: parseInt(item.idPeriodo)},function(){
+      alertify.success('Nota agregada con éxito')
     })
-  }).then((data) => {
-  })
 }
 
-
-
-listarThead(urlApi+"/api/Periodoes");
+listarThead("Periodoes");
 
 
 
