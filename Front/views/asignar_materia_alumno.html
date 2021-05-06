@@ -5,20 +5,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/styles/estilosPrincipales.css">
     <link rel="stylesheet" href="../assets/styles/NavbarStyles.css">
     <link rel="stylesheet" href="../assets/styles/StyleForms.css">
     <link rel="icon" href="../assets/icons/School.ico">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
-    <!-- CSS personalizado -->
-    <link rel="stylesheet" href="../assets/main.css">
 
     <title>Colegio Grande - Asignar Alumno</title>
 </head>
 
 <body>
     <img class="Icono hamburguesa" src="../assets/icons/menu.svg" alt="">
+    <main>
+        <div class="contenedorNav">
     <nav class="nav-bar ver  ">
         <ul class="menu">
            <a href="../index.html"> <li> <img src="../assets/icons/home 1.svg" alt="Icono Incio"> INICIO</li></a>
@@ -33,22 +31,24 @@
             <a href="reportes.html"><li> <img src="../assets/icons/lista-de-verificacion 1.svg" alt="Icono Reportes"> REPORTES</li></a>
             </ul> 
     </nav>
-
-
-    <section class="seccionFormulario ver hidden">
+</div>
+<div class="contenedorSection ver hidden">
+    <section class="seccionFormulario ">
         <h1 class="tituloForm">Asignar Materia a Alumno</h1>
-        <form class="frm">
+        <form class="frm ">
             <div class="contenedorInputs">
-
+<div class="formulario__asignar">
                 <label for="nombrePersona">Nombre del Alumno: </label>
-                <select id="nombrePersona">
+                <select class="selectAsignar" id="nombrePersona">
                     <option>Seleccione alumno</option>
                 </select>
-
+                </div>
+<div class="formulario__asignar">
                 <label for="nombreMateria">Materia: </label>
-                <select id="nombreMateria">
+                <select class="selectAsignar" id="nombreMateria">
                     <option>Seleccione materia</option>
                 </select>
+                </div>
                 <input type="hidden" value="null" id="notaNull">
             </div>
             <div class="buttons">
@@ -59,7 +59,7 @@
     </section>
 
 
-    <section class="seccionTabla ver hidden">
+    <section class="seccionTabla ">
 
         <div class="encabezadoTabla">
             <h1 class="tituloTabla">Gestionar Asignación</h1>
@@ -70,10 +70,7 @@
 
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="table-responsive">
-                    <table id="example" class="table table-bordered order-table " style="width:100%">
+                     <table class="tablaAlumnos tablaMaterias" >
                         <thead>
                             <tr>
                                 <th>Nombre Del Alumno</th>
@@ -85,11 +82,9 @@
 
                         </tbody>
                     </table>
-                </div>
-            </div>
-        </div>
+                
     </section>
-
+<section class="sectionModal">
     <div class="modalUpdate">
         <div class="headerModal">
             <h2>Editar Materia Alumno</h2>
@@ -117,13 +112,13 @@
             </div>
         </form>
     </div>
+    </section>
+    </div>
+    </main>
     <script src="../assets/JavaScript/AsignarMateriasPersona.js"></script>
     <script src=" https://unpkg.com/sweetalert/dist/sweetalert.min.js "> </script>
     <script src="../assets/JavaScript/funcionesExternas.js"></script>
-    <!-- jQuery, Popper.js, Bootstrap JS -->
-    <script src="../assets/jquery/jquery-3.3.1.min.js"></script>
-    <script src="../assets/popper/popper.min.js"></script>
-    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+   <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
 
 
 </body>

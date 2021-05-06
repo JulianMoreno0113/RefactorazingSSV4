@@ -45,7 +45,7 @@ function theadperiodos(periodos) {
   tr.appendChild(crearTh("Nombre del Estudiante"))
   tr.appendChild(crearTh("Materia"))
     periodos.forEach(periodo => tr.appendChild(crearTh(periodo.NombreP+" "+periodo.Porcentaje+"%")))
-  
+   tr.appendChild(crearTh("Acción"));
   thead.appendChild(tr);	
 }
 
@@ -92,6 +92,7 @@ function llenarTabla(notas, periodos) {
               let td_nota = crearTd("");
               let input_nota = document.createElement("input");
               input_nota.setAttribute("type","number");
+              input_nota.setAttribute("class", "inputNota");
               input_nota.value = nota;
               input_nota.addEventListener('keyup',function() {
                 if(this.value != nota){

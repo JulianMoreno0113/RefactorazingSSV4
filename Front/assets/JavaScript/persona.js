@@ -52,7 +52,7 @@ console.log(p)
   <td>  ${p.Nombres} </td>
   <td>  ${p.Apellidos} </td>
   <td>  ${p.TDoc_Id == 1 ? "CC" : "TI"}  </td>
-  <td>  ${p.Activo ? "Activo" : "Inactivo"}  </td>`;
+  <td >  ${p.Activo ? "Activo" : "Inactivo"}  </td>`;
 	profe.innerHTML += `<td class="tdBoton ">
   <button class="buttonEditar"onclick="AbrirEditar
 	(${p.Id},
