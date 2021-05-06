@@ -3,6 +3,8 @@
 function limpiarDatos() {
   document.querySelector(".frmEditar").reset();
 }
+
+//abrirModalActualización
 function OpenUpdate() {
   let modal = document.querySelector(".modalUpdate");
 
@@ -70,6 +72,12 @@ function MostrarNav() {
     alert("error");
   }
 }
+//abrir menu responsive
+let flechaMenuResponsive = document.querySelector(".abrirSubMenuResponsive");
+  flechaMenuResponsive.addEventListener("click",function(){
+    let submenu = document.querySelector(".submenu");
+    return submenu.style.display == "block"?submenu.style.display = "none": submenu.style.display = "block"
+  })
 //logica img -------------------------------------------------
 let hmtlLocation = window.location.toString();
 

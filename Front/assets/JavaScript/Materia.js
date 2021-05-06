@@ -6,73 +6,61 @@ const inputId = document.getElementById("idMateria");
 const nombreEditar = document.getElementById("nombreEditar");
 const btnGuardarMateria = document.getElementById("ButtonAddEditar");
 const arrayMaterias = [];
-//const urlApi = "http://fercho12345-001-site1.itempurl.com";
-const urlApi = "http://localhost:52811"
 
 btnGuardarMateria.addEventListener("click", () => {
   Editar(inputId.value, nombreEditar.value);
 });
 
 function listarMateria() {
-  fetch(urlApi+"/api/Materias")
-    .then((response) => response.json())
-    .then((materias) =>
-      materias.forEach((materia) => {
-        arrayMaterias.push(materia.Nombre);
-        llenarTabla(materia);
-      })
-    );
+  EjecutarPeticionServidor("Materias", "GET", null, function (materias) {
+    materias.forEach((materia) => {
+      arrayMaterias.push(materia.Nombre);
+      llenarTabla(materia);
+    });
+  });
 }
 
 boton.addEventListener("click", (e) => {
-  if (arrayMaterias.some((materias) => inputNombre.value == materias) || inputNombre.value == "" || inputNombre.value == null || inputNombre.value == undefined) {
-	  e.preventDefault();
-      swal(
-        "¡Transaccion Fallida! ",
-        "-Error el documento esta repetido \n -Campos Vacios",
-        "error"
+  if (
+    arrayMaterias.some((materias) => inputNombre.value == materias) ||
+    inputNombre.value == "" ||
+    inputNombre.value == null ||
+    inputNombre.value == undefined
+  ) {
+    e.preventDefault();
+    swal(
+      "¡Transaccion Fallida! ",
+      "Campos Vacios",
+      "error"
     );
-	inputNombre.value = "";
+    inputNombre.value = "";
   } else {
-	e.preventDefault();
+    e.preventDefault();
     Agregar(inputNombre.value),
-      
-        swal(
-          "¡Transaccion Exitosa! ",
-          "-Has Agregado un Materia",
-          "success"
-        )
-		inputNombre.value = "";
+      swal("¡Transaccion Exitosa! ", "-Has Agregado un Materia", "success");
+    inputNombre.value = "";
   }
 });
 
-function llenarTabla(m) {
-  let nMateria = document.createElement("tr");
+//visualizarInformación
+function llenarTabla(materia) {
+  let filaMateria = document.createElement("tr");
 
-	nMateria.innerHTML += "<td>" + m.Nombre + "</td>";
-	nMateria.setAttribute("data-id", m.Id);
-	nMateria.innerHTML += `<td class="tdBoton "><button class="buttonEditar "onclick="AbrirEditar(${m.Id},'${m.Nombre}')">Editar</button>
-    <button class=" buttonEliminar" onclick="ConfirmarEliminar(${m.Id})">Eliminar</button></td>`;
-	tabla.appendChild(nMateria);
-	inputNombre.value = "";
-
+  filaMateria.innerHTML += "<td>" + materia.Nombre + "</td>";
+  filaMateria.setAttribute("data-id", materia.Id);
+  filaMateria.innerHTML += `<td class="tdBoton "><button class="buttonEditar "onclick="AbrirEditar(${materia.Id},'${materia.Nombre}')">Editar</button>
+    <button class=" buttonEliminar" onclick="ConfirmarEliminar(${materia.Id})">Eliminar</button></td>`;
+  tabla.appendChild(filaMateria);
+  inputNombre.value = "";
 }
 
-function Agregar(m) {
-  fetch(urlApi+"/api/Materias", {
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    method: "POST",
-    body: JSON.stringify({
-      Nombre: m,
-    }),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      llenarTabla(data);
-    });
+function Agregar(nombreMateria) {
+  EjecutarPeticionServidor(
+    "Materias",
+    "POST",
+    { Nombre: nombreMateria },
+    llenarTabla
+  );
 }
 
 function AbrirEditar(id, nombre) {
@@ -82,46 +70,40 @@ function AbrirEditar(id, nombre) {
 }
 
 function Editar(id, nombre) {
-	if (nombre == "" ) {
-		swal("¡Transaccion Fallida! ", "Campos Vacios", "error");
-	  } else {
-	fetch(urlApi+"/api/Materias/" + id, {
-		headers: {
-			Accept: "application/json",
-			"Content-Type": "application/json"
-		},
-		method: "PUT",
-		body: JSON.stringify({
-			Id: parseInt(id),
-			Nombre: nombre
-		})
-	}).then(() => {
-		let tr = document.querySelector(`tr[data-id="${id}"]`);
-	
-		tr.innerHTML = `<td>${nombre}</td><td class="tdBoton "><button class="buttonEditar "onclick="AbrirEditar(${id},'${nombre}')">Editar</button>
+  if (nombre == "") {
+    swal("¡Transaccion Fallida! ", "Campos Vacios", "error");
+    return false;
+  }
+
+  const materiaEditar = {
+    Id: parseInt(id),
+    Nombre: nombre,
+  };
+  EjecutarPeticionServidor(
+    "Materias/" + id,
+    "PUT",
+    materiaEditar,
+    function (data) {
+      let tr = document.querySelector(`tr[data-id="${id}"]`);
+
+      tr.innerHTML = `<td>${nombre}</td><td class="tdBoton "><button class="buttonEditar "onclick="AbrirEditar(${id},'${nombre}')">Editar</button>
     <button class=" buttonEliminar" onclick="Eliminar(${id})">Eliminar</button></td>`;
-	}),
-		limpiarDatos(),
-		CloseUpdate();
-	}
+    swal(
+      "¡Transaccion Exitosa! ",
+      "¡Se ha editado la materia! ",
+      "success")
+      limpiarDatos(), CloseUpdate();
+    }
+  );
 }
 
 function Eliminar(id) {
   ConfirmarEliminar();
-  fetch(urlApi+"/api/Materias/" + id, {
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    method: "DELETE",
-    body: JSON.stringify({
-      Id: parseInt(id),
-    }),
-  }).then(() => {
+  EjecutarPeticionServidor("Materias/" + id, "DELETE", { 
+    Id: parseInt(id) 
+  },function(data){
     let tr = document.querySelector(`tr[data-id="${id}"]`);
     tabla.removeChild(tr);
-    inputId.value = "";
-    inputNombre.value = "";
   });
 }
 function ConfirmarEliminar(id) {

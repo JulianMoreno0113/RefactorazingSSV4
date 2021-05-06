@@ -1,16 +1,13 @@
 const tabla = document.querySelector(".tbody");
-//const urlApi = "http://fercho12345-001-site1.itempurl.com";
-const urlApi = "http://localhost:52811";
+
 function listarAlumno() {
-	fetch(urlApi+"/api/Personas/ConsultarTodo")
-		.then((response) => response.json())
-		.then((personas) =>
-			personas.forEach((persona) => {
-				if (persona.Tp_Id == 1) {
-					llenarTabla(persona);
-				}
-			})
-		);
+	EjecutarPeticionServidor("Personas/ConsultarTodo","GET",null,function(personas){
+		personas.forEach((persona) => {
+			if (persona.Tp_Id == 1) {
+				llenarTabla(persona);
+			}
+		})
+	})
 }
 
 function llenarTabla(p) {

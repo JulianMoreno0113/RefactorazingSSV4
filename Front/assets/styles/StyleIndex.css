@@ -1,32 +1,20 @@
-body{
-    margin: 0;
-    font-family: Roboto;
-    color: #0D0D0D;
-}
-
 
 .titulo{
-    width: 85%;
-    left: 15%;
-    position: relative;
-    display: flex;
-    justify-content: center;
-
+    width:100%;
+    
+    margin-top: 10px;
+    display:flex;
+    justify-content:center;
 }
-
 h1{
-    position: absolute;
-    margin: 10px 50%;
+    margin: auto;
     font-size: 32px;
     font-weight: 900;
-    width: 410px;
-    height: auto;
-    background: #FFFFFF;
-    text-shadow: 1px 3px 0 #969696, 1px 13px 5px #aba8a8;
+     text-shadow: 1px 3px 0 #969696, 1px 13px 5px #aba8a8;
     color: #023859;
     letter-spacing: 10px;
-    
 }
+
 
 /* ******* BOTON ******** */
 
@@ -46,10 +34,10 @@ button:hover{
 /*   ***** ******** */
 
 .slideimg{
-    position: absolute;
-    width: 77%;
-    margin-left: 19.5%;
-    top: 80px;
+    
+   width: 95%;
+   margin:0;
+   margin-top: 4%;
 }
 .slideimg .imgIndexSlide{
     width: 100%;
@@ -57,25 +45,28 @@ button:hover{
     height:380px;
     border-radius: 15px;
 }
+
+.cambiarImagen{
+    height:380px;
+}
+.slideimg div {
+    margin-top: -206px;
+}
+.botonesImagen {
+    text-align: center;
+}
 .slideimg .icons{
-    position: absolute;
     width: 3%;
-    top: 50%;
     cursor: pointer;
 }
 .slideimg .active{
     background-color: #3A6D8C;
 }
 .next{
-    right:0;
+ margin-left: 93%;
 }
-.back{
-    left:0;
-}
-.slideimg div{
-    text-align: center;
-    margin-top: -35px;
-}
+
+
 .slideimg button {
     border-radius: 20px;
     height: 15px;
@@ -86,13 +77,14 @@ button:hover{
     background-color: #F2F2F2;
 }
 .RedesSociales{
-    position: relative;
+    
     display: flex;
     justify-content: space-around;
-    position: absolute;
-    width: 80%;
-    margin-left: 18%;
-    top: 480px;
+    
+    width: 95%;
+
+    margin-top: 20px;
+    
 }
 .RedesSociales div{
     border-radius: 10px;
@@ -170,6 +162,9 @@ h1{
     width: 325px;
 }
 
-
-
 }
+
+
+ 
+
+

@@ -9,8 +9,7 @@ let tipoDoc = document.getElementById("tipoDocumento")
 const tabla = document.querySelector(".TablaReporte");
 let promedio=[]
 
-//const urlApi = "http://fercho12345-001-site1.itempurl.com";
-const urlApi = "http://localhost:52811";
+
 
     function crearTh(texto){
         let th = document.createElement("th");
@@ -24,24 +23,18 @@ const urlApi = "http://localhost:52811";
     }
 
 function listarTodo(id) {
-    fetch(urlApi + "/api/periodoes")
-      .then((data) => data.json())
-      .then((periodos) => {
-            listarNotas(id);
-            listarThead(periodos);
-          }
-      );
+    EjecutarPeticionServidor("Periodoes","GET",null,function(periodos){
+        listarNotas(id);
+        listarThead(periodos);
+    })
   }
 
 
 async function listarNotas(id) {
-    await fetch(urlApi+"/api/Personas/"+id)
-        .then((data) => data.json())
-        .then((notas) => {
-            llenarTabla(notas)
-        })
-        .catch((error) => error);
+    await EjecutarPeticionServidor("Personas/"+id,"GET",null,llenarTabla)
 }
+
+
 function llenarTabla(notas,periodos) { 
   notas.forEach(n => {
       nombreAlumno.innerHTML = n.nombrePersona;
