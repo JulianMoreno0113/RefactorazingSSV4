@@ -35,7 +35,7 @@ function ListarPeriodo() {
 	})
 }
 
-function llenarTabla(m) {
+function LlenarTabla(m) {
 	let nMateria = document.createElement("tr");
 
 	nMateria.innerHTML += `<td>${m.NombreP} </td>
@@ -168,4 +168,4 @@ function validarPorcentaje(porcentajePeriodo){
   }
 }
 
-listarPeriodo();
+ListarPeriodo();
