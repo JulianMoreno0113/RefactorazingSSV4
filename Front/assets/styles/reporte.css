@@ -68,6 +68,19 @@ header h1{
     margin-top: 40px;
     float: right;
 }
+
+.aprobado{
+    background-color: #25e88d;
+    font-weight: 500;
+    color: white;
+}
+
+.reprobado{
+    background-color :#ff2259;
+    font-weight: 500;
+    color: white;
+}
+
 @media (max-width: 1000px) {
     .datosAlumno{
     width: 90%; 
