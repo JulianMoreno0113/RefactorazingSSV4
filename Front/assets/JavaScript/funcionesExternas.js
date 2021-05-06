@@ -3,6 +3,8 @@
 function limpiarDatos() {
   document.querySelector(".frmEditar").reset();
 }
+
+//abrirModalActualización
 function OpenUpdate() {
   let modal = document.querySelector(".modalUpdate");
 

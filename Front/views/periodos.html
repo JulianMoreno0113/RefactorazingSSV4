@@ -57,7 +57,7 @@
                     </div>
                 </div>
                 <div>
-                    <div class="formulario__grupo" id="grupo__nota">
+                    <div class="formulario__grupo" id="porcentajePeriodoNota">
                         <label for="nota" class="formulario__label">Porcentaje del periodo:</label>
                         <div class="formulario__grupo-input">
                         <input type="text" id="porcentaje" class="formulario__input" name="porcentaje" placeholder="Escribe el porcentaje">
@@ -84,13 +84,13 @@
             <h1 class="tituloTabla">Gestionar Periodos</h1>
             <div>
                 <input class="form-control col-md-6 light-table-filter" data-table="order-table" type="text"
-                    placeholder="Buscar..." id="BuscarId">
-            </div>
+                placeholder="Buscar..." id="BuscarId">
+                </div>
         </div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="table-responsive">
-                    <table id="example" class="table table-striped table-bordered" style="width:100%">
+                    <table id="example" class="table table-bordered order-table " style="width:100%">
                         <thead>
                             <tr>
                                 <th>Nombre del periodo</th>
@@ -118,7 +118,8 @@
                     <input type="hidden" id="idPeriodo">
                     <input type="text" id="nombreEditar" placeholder="Nombre Del perido">
                     <label for="">Porcentaje:</label>
-                    <input type="text" id="PorcentajeEditar" placeholder="Porcentaje Del perido">
+                    <i class="porcentaje formulario__validacion-estado documento fas fa-times-circle"></i>
+                    <input type="text" id="porcentajeEditar" placeholder="Porcentaje Del perido">
                 </div>
             </div>
             <div class="buttonsEditar">
@@ -126,6 +127,7 @@
             </div>
         </form>
     </div>
+    <script src="../assets/JavaScript/request.js"></script>
     <script src="../assets/JavaScript/Periodos.js"></script>
     <script src="../assets/JavaScript/funcionesExternas.js"></script>
     <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
@@ -138,7 +140,6 @@
 
     <!-- datatables JS -->
     <script type="../assets/text/javascript" src="datatables/datatables.min.js"></script>
-
     <script type="../assets/text/javascript" src="main.js"></script>
 </body>
 

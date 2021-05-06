@@ -1,40 +1,38 @@
 const tabla = document.querySelector(".tbody");
-const boton = document.getElementById("ButtonAdd");
+const botonAgg = document.getElementById("ButtonAdd");
 const inputNombre = document.getElementById("nombre");
 const inputId = document.getElementById("idPeriodo");
 const nombreEditar = document.getElementById("nombreEditar");
 const btnGuardarPeriodo = document.getElementById("ButtonAddEditar");
 const porcentajePeriodo = document.getElementById("porcentaje")
-const PorcentajeEditar=document.getElementById("PorcentajeEditar");
-let otrosporcentajes =[]
+const porcentajeEditar=document.getElementById("porcentajeEditar");
+const porcentajePeriodoNota = document.getElementById("porcentajePeriodoNota")
+const iconoPorcentajePeriodoNota = document.querySelector(`#porcentajePeriodoNota i`)
+let otrosporcentajes = []
 let totalArregloPorcentaje=0;
-const urlApi = "http://fercho12345-001-site1.itempurl.com";
+let valorPorcentajeTemp = 0;
 const urlHost = "http://localhost:52811"
 //const urlApi = "https://localhost:44351";
 
-boton.addEventListener("click", () => {
+botonAgg.addEventListener("click", () => {
 	if(inputNombre.value == "" 
 	|| inputNombre.value == null || inputNombre.value == undefined || parseInt(porcentaje.value) <=0
 	|| porcentaje.value == null || porcentaje.value == undefined){
 	swal(
-        "¡Transaccion Fallida! ",
-        "-Error el porcentaje es incorrecto \n -Campos Vacios",
+        "¡Transacción Fallida! ",
+        "-Error el porcentaje es incorrecto \n -Campos Vacíos",
         "error"
     );}else
 	{Agregar(inputNombre.value,porcentaje.value)};
 });
-btnGuardarPeriodo.addEventListener("click", () => {
-	Editar(inputId.value, nombreEditar.value,PorcentajeEditar.value);
-});
+
 
 function listarPeriodo() {
-	fetch(urlHost+"/api/Periodoes")
-		.then((response) => response.json())
-		.then((periodos) =>
-			periodos.forEach((periodo) => {
-				llenarTabla(periodo);
-			})
-		);
+	EjecutarPeticionServidor("Periodoes","GET",null,function(periodos){
+		periodos.forEach((periodo) => {
+			llenarTabla(periodo);
+		})
+	})
 }
 
 function llenarTabla(m) {
@@ -52,75 +50,60 @@ function llenarTabla(m) {
 }
 
 function Agregar(nombre,porcentaje) {
-	fetch(urlHost +"/api/Periodoes", {
-		headers: {
-			Accept: "application/json",
-			"Content-Type": "application/json"
-		},
-		method: "POST",
-		body: JSON.stringify({
-			NombreP: nombre,
-			Porcentaje: porcentaje
-		})
-	})
-		.then((response) => {
-			if (response.status==400) {
-				swal ( "¡Transaccion Fallida! " ,"Error Campos Vacios", "error" );
-			}else {
-				swal ( "¡Transaccion Exitosa! " , "¡Se ha agregado un nuevo Periodo! " , "success" );
-				response.json().then((response)=>llenarTabla(response))
-			}
-		})
-		
+	EjecutarPeticionServidor("Periodoes","POST",{
+		NombreP: nombre,
+		Porcentaje: porcentaje
+	},function (datos){
+		swal("El periodo ha sido agregado correctamente", {
+			icon: "success",
+		  })
+		llenarTabla(datos)
+	} 
+	)
+	
 }
 
 function AbrirEditar(id, nombre,porcentaje) {
 	OpenUpdate();
 	inputId.value = id;
 	nombreEditar.value = nombre;
-	PorcentajeEditar.value=porcentaje
+	porcentajeEditar.value=porcentaje
+	valorPorcentajeTemp = porcentaje;
 }
 
 function Editar(id, nombre,porcentaje) {
-	fetch(urlHost+"/api/Periodoes/" + id, {
-		headers: {
-			Accept: "application/json",
-			"Content-Type": "application/json"
-		},
-		method: "PUT",
-		body: JSON.stringify({
-			Id: parseInt(id),
-			NombreP: nombre,
-			Porcentaje: parseFloat(porcentaje)
-		})
-	}).then(() => {
+	EjecutarPeticionServidor("Periodoes/"+id,"PUT",{
+		Id: parseInt(id),
+		NombreP: nombre,
+		Porcentaje: parseFloat(porcentaje)
+	},function(data){
 		let tr = document.querySelector(`tr[data-id="${id}"]`);
-
-		tr.innerHTML = `<td>${nombre}</td><td>${porcentaje}%</td><td class="tdBoton "><button class="buttonEditar"onclick="AbrirEditar(${id},'${nombre}')">Editar</button>
+		tr.innerHTML = `<td>${nombre}</td><td>${porcentaje}%</td><td class="tdBoton "><button class="buttonEditar"onclick="AbrirEditar(${id},'${nombre}','${porcentaje}')">Editar</button>
     <button class=" buttonEliminar" onclick="Eliminar(${id})">Eliminar</button></td>`;
-	}),
-		limpiarDatos(),
-		CloseUpdate();
+	})
+	limpiarDatos(),
+	CloseUpdate();		
 }
 
 function Eliminar(id) {
-	fetch(urlHost+"/api/Periodoes/" + id, {
+	EjecutarPeticionServidor("Periodoes/"+id,"DELETE",null,function(){
+		let tr = document.querySelector(`tr[data-id="${id}"]`);
+		tabla.removeChild(tr);
+		inputId.value = "";
+		inputNombre.value = "";
+	})
+}
+
+function Delete(url, callback){
+	fetch(urlApi+url, {
 		headers: {
 			Accept: "application/json",
 			"Content-Type": "application/json"
 		},
 		method: "DELETE",
-		body: JSON.stringify({
-			Id: parseInt(id)
-		})
 	}).then((response) => {
-			let tr = document.querySelector(`tr[data-id="${id}"]`);
-		tabla.removeChild(tr);
-		inputId.value = "";
-		inputNombre.value = "";
-		}
-		
-	);
+		callback(response);
+	});
 }
 
 function ConfirmarEliminar(id){
@@ -138,31 +121,49 @@ function ConfirmarEliminar(id){
 			icon: "success",
 		  });
 		} else {
-		  swal("No se elimino el periodo");
+		  swal("No se eliminó el periodo");
 		}
 	  });
 }
 
+porcentajeEditar.addEventListener("keyup",()=>{
+	if((totalArregloPorcentaje-valorPorcentajeTemp)+parseInt(porcentajeEditar.value)<101 || parseInt(porcentaje.value) < 0){
+		porcentajeEditar.style.border = "2px solid green"
+		btnGuardarPeriodo.disabled = false;
+		btnGuardarPeriodo.style.backgroundColor="#023859"
+	}else{
+		porcentajeEditar.style.border = "2px solid red"
+		btnGuardarPeriodo.disabled = true;
+		btnGuardarPeriodo.style.backgroundColor="#658294"
+	}
+})
+
+btnGuardarPeriodo.addEventListener("click", (e) => {
+		Editar(inputId.value, nombreEditar.value,porcentajeEditar.value);
+		swal("Transacción Exitosa","El periodo fue editado correctamente", {
+			icon: "success",
+		})
+})
+
+
 porcentajePeriodo.addEventListener("keyup",()=>{validarPorcentaje(porcentajePeriodo)})
 
-PorcentajeEditar.addEventListener("keyup",()=>{validarPorcentaje(PorcentajeEditar) })
 function validarPorcentaje(porcentajePeriodo){
+	console.log(porcentajePeriodo)
   if (parseFloat(porcentajePeriodo.value) + totalArregloPorcentaje<101){
-    document.getElementById("grupo__nota").classList.add("formulario__grupo-correcto");
-    document.getElementById("grupo__nota").classList.remove("formulario__grupo-incorrecto");
-    document.querySelector(`#grupo__nota i`).classList.add('fa-check-circle');
-    document.querySelector(`#grupo__nota i`).classList.remove('fa-times-circle');
-    document.getElementById("ButtonAdd").disabled=false;
-    document.getElementById("ButtonAdd").style.backgroundColor="#023859"
-    
-    
+    porcentajePeriodoNota.classList.add("formulario__grupo-correcto");
+    porcentajePeriodoNota.classList.remove("formulario__grupo-incorrecto");
+    iconoPorcentajePeriodoNota.classList.add('fa-check-circle');
+    iconoPorcentajePeriodoNota.classList.remove('fa-times-circle');
+    botonAgg.disabled=false;
+    botonAgg.style.backgroundColor="#023859"
   }else{
-   document.getElementById(`grupo__nota`).classList.add("formulario__grupo-incorrecto");
-   document.getElementById(`grupo__nota`).classList.remove("formulario__grupo-correcto");
-   document.querySelector(` #grupo__nota i`).classList.add('fa-times-circle');
-   document.querySelector(`#grupo__nota i`).classList.remove('fa-check-circle'); 
-   document.getElementById("ButtonAdd").disabled=true;
-    document.getElementById("ButtonAdd").style.backgroundColor="#658294"
+   porcentajePeriodoNota.classList.add("formulario__grupo-incorrecto");
+   porcentajePeriodoNota.classList.remove("formulario__grupo-correcto");
+   porcentajePeriodoNota.classList.add('fa-times-circle');
+   iconoPorcentajePeriodoNota.classList.remove('fa-check-circle'); 
+   botonAgg.disabled=true;
+   botonAgg.style.backgroundColor="#658294"
    
   }
 }
