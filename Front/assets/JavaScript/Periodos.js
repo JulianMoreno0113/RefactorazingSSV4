@@ -1,5 +1,5 @@
 const tabla = document.querySelector(".tbody");
-const botonAgg = document.getElementById("ButtonAdd");
+const botonAgg = document.getElementById("btnAgregar");
 const inputNombre = document.getElementById("nombre");
 const inputId = document.getElementById("idPeriodo");
 const nombreEditar = document.getElementById("nombreEditar");
@@ -8,7 +8,7 @@ const porcentajePeriodo = document.getElementById("porcentaje")
 const porcentajeEditar=document.getElementById("porcentajeEditar");
 const porcentajePeriodoNota = document.getElementById("porcentajePeriodoNota")
 const iconoPorcentajePeriodoNota = document.querySelector(`#porcentajePeriodoNota i`)
-let otrosporcentajes = []
+let otrosPorcentajes = []
 let totalArregloPorcentaje=0;
 let valorPorcentajeTemp = 0;
 const urlHost = "http://localhost:52811"
@@ -27,10 +27,10 @@ botonAgg.addEventListener("click", () => {
 });
 
 
-function listarPeriodo() {
+function ListarPeriodo() {
 	EjecutarPeticionServidor("Periodoes","GET",null,function(periodos){
 		periodos.forEach((periodo) => {
-			llenarTabla(periodo);
+			LlenarTabla(periodo);
 		})
 	})
 }
@@ -57,7 +57,7 @@ function Agregar(nombre,porcentaje) {
 		swal("El periodo ha sido agregado correctamente", {
 			icon: "success",
 		  })
-		llenarTabla(datos)
+		LlenarTabla(datos)
 	} 
 	)
 	
