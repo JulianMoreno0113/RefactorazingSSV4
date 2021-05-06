@@ -55,7 +55,7 @@ function llenarTablaPersona(p) {
   <td>  ${p.TDoc_Id == 1 ? "CC" : "TI"}  </td>
   <td >  ${p.Activo ? "Activo" : "Inactivo"}  </td>`;
 	profe.innerHTML += `<td class="tdBoton ">
-  <button class="btnEditar"onclick="AbrirEditar
+  <button class="buttonEditar "onclick="AbrirEditar
 	(${p.Id},
 	${p.NDoc},
 	'${p.Nombres}',
