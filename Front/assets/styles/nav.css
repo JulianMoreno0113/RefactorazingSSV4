@@ -1,0 +1,33 @@
+.nav-bar {
+	background-color: #023859;
+	margin: 0;
+	height: 100%;
+	width: 15%;
+	position: fixed;
+}
+.nav-bar ul {
+	padding: 31%;
+	padding-top: 10px;
+	margin-block-start: 0;
+	margin-block-end: 0;
+}
+.nav-bar ul li {
+	list-style: none;
+	margin: 15px 0;
+	width: 100%;
+	font-size: 1.1vw;
+}
+.nav-bar ul li img {
+	vertical-align: middle;
+	margin-right: 2%;
+	width: 60%;
+	height: 40px;
+}
+
+.nav-bar a {
+	text-decoration: none;
+	color: #f2f2f2;
+}
+.nav-bar a :hover {
+	border-bottom: 1px solid #f2f2f2;
+}

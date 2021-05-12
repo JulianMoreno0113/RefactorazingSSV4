@@ -171,9 +171,8 @@ const validarCampo = (expresion, input, campo) => {
               document.querySelector(`#grupo__${campo} i`).classList.remove('fa-times-circle');
               document.querySelector(`#grupo__${campo} .formulario__input-error`).classList.remove('formulario__input-error-activo')                   
               campos[campo] = true;
-              document.getElementById("btnAgregar").disabled = false;
-              document.getElementById("btnAgregar").style.backgroundColor =
-								"#023859";
+              document.getElementById("btnAgregar").disabled=false;
+              document.getElementById("btnAgregar").style.backgroundColor="#023859"
               
        }else{
               document.getElementById(`grupo__${campo}`).classList.add("formulario__grupo-incorrecto");
@@ -182,9 +181,8 @@ const validarCampo = (expresion, input, campo) => {
               document.querySelector(`#grupo__${campo} i`).classList.remove('fa-check-circle'); 
               document.querySelector(`#grupo__${campo} .formulario__input-error`).classList.add('formulario__input-error-activo')
               campos[campo] = false;
-              document.getElementById("btnAgregar").disabled = true;
-              document.getElementById("btnAgregar").style.backgroundColor =
-								"#658294";
+              document.getElementById("btnAgregar").disabled=true;
+              document.getElementById("btnAgregar").style.backgroundColor="#658294"
        }
 }
 

@@ -56,14 +56,7 @@ function llenarTabla(notas,periodos) {
       }
       let resultado=(promedio.reduce(function(a, b){ return a + b; })).toFixed(2);
       
-      if(resultado>=65){
-        tr.appendChild(crearTd(resultado)).classList.add("aprobado")
-        tr.appendChild(crearTd("Aprobado")).style.color="#119200"
-      }else{
-        tr.appendChild(crearTd(resultado)).classList.add("reprobado")
-        tr.appendChild(crearTd("Reprobado")).style.color="#bb2929"
-      }
-      
+      tr.appendChild(crearTd(resultado))
       
       document.querySelector(".tbodyTabla").appendChild(tr);
 }
@@ -77,7 +70,7 @@ function listarThead (periodos){
   for (let i = 0; i < periodos.length; i++) {
     tr.appendChild(crearTh(periodos[i].NombreP+" "+periodos[i].Porcentaje+"%"))
   }
-  tr.appendChild(crearTh("Nota final"))
+  tr.appendChild(crearTh("Promedio"))
 }
 
 listarTodo(id);

@@ -27,7 +27,7 @@ namespace SSV4.Models
         public string NDoc { get; set; }
         public Nullable<bool> Activo { get; set; }
         public int Tp_Id { get; set; }
-
+    
         public  TDoc TDoc { get; set; }
         public  TipoPersona TipoPersona { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

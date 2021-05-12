@@ -32,37 +32,69 @@ namespace SSV4.Controllers
         // GET: api/Personas
         public IQueryable GetMultitablaPersona()
         {
-            var datos = (
-                      from per in db.Persona
-                      join PM in db.PersonaMateria on per.Id equals PM.Persona_Id
-                      join M in db.Materia on PM.Materia_Id equals M.Id
-                      where per.Tp_Id == 1
-                      select new {
-                          nombrePersona = per.Nombres + " " + per.Apellidos,
-                          nombreMateria = M.Nombre,
-                          idPM = PM.Id,
-                          profe = (
-                                from profeMatea in db.PersonaMateria
-                                join personaProfe in  db.Persona on profeMatea.Persona_Id equals personaProfe.Id
-                                where profeMatea.Materia_Id == M.Id && personaProfe.Tp_Id == 2
-                                select personaProfe.Nombres
-                          ).FirstOrDefault(),
-                          notasPersona = (
-                                from NTM in db.NotasMateria
-                                join PRD in db.Periodo on NTM.Periodo_Id equals PRD.Id
-                                where NTM.PersonaMateriaId == PM.Id
-                                select new {
-                                    idnota = NTM.Id,
-                                    nota = NTM.Notas,
-                                    idPeriodo = NTM.Periodo_Id,
-                                    NombrePeriodo = PRD.NombreP
-                                }
-                          )
 
-                      }
-                ) ;
 
-                return datos;
+            //var datos = db.Persona.Include(p => p.PersonaMateria)
+            // .Where((persona) => persona.Tp_Id == 1)
+            // .Select(p => new { nombrePersona = p.Nombres+ " "+ p.Apellidos,
+            // nombreMateria= p.PersonaMateria.Select(pm=>new { pm.Materia.Nombre}),
+            // idPM= p.PersonaMateria.Select(pm=>new { pm.Id}),
+            //Notas = p.PersonaMateria.Select(pm => new { Notas = pm.NotasMateria }) });
+
+            var datos = db.Persona.Join(db.PersonaMateria, p => p.Id, pm => pm.Persona_Id, (p, pm) => new { p, pm })
+                .Join(db.Materia, personaMateria=> personaMateria.pm.Materia_Id, m=>m.Id,(personaMateria,m)=>new {personaMateria,m })
+                .Where(p=>p.personaMateria.p.Tp_Id == 1)
+                .Select(o=> new { 
+                    nombrePersona= o.personaMateria.p.Nombres+ " "+ o.personaMateria.p.Apellidos,
+                    nombreMateria= o.m.Nombre,
+                    idPM = o.personaMateria.pm.Id,
+                    profe= (db.Persona.Join(db.PersonaMateria, pro=>pro.Id, prmat =>prmat.Persona_Id,(pro,prmat)=>new { pro, prmat })
+                    .Where(pr=>pr.pro.Tp_Id==2 && pr.prmat.Materia_Id == o.m.Id ))
+                    .Select(pro=>pro.pro.Nombres).FirstOrDefault(),
+                    notasPersona=(db.NotasMateria.Join(db.Periodo, ntm=>ntm.Periodo_Id,per=>per.Id,(ntm,per)=>new {ntm, per})
+                    .Where(nt=> nt.ntm.PersonaMateriaId == o.personaMateria.pm.Id))
+                    .Select(notm => new {
+                        idnota = notm.ntm.Id,
+                        nota = notm.ntm.Notas,
+                        idPeriodo = notm.ntm.Periodo_Id,
+                        NombrePeriodo = notm.per.NombreP
+                    })
+                });
+
+
+            //var datos = (
+            //          from per in db.Persona
+            //          join PM in db.PersonaMateria on per.Id equals PM.Persona_Id
+            //          join M in db.Materia on PM.Materia_Id equals M.Id
+            //          where per.Tp_Id == 1
+            //          select new
+            //          {
+            //              nombrePersona = per.Nombres + " " + per.Apellidos,
+            //              nombreMateria = M.Nombre,
+            //              idPM = PM.Id,
+            //              profe = (
+            //                    from profeMatea in db.PersonaMateria
+            //                    join personaProfe in db.Persona on profeMatea.Persona_Id equals personaProfe.Id
+            //                    where profeMatea.Materia_Id == M.Id && personaProfe.Tp_Id == 2
+            //                    select personaProfe.Nombres
+            //              ).FirstOrDefault(),
+            //              notasPersona = (
+            //                    from NTM in db.NotasMateria
+            //                    join PRD in db.Periodo on NTM.Periodo_Id equals PRD.Id
+            //                    where NTM.PersonaMateriaId == PM.Id
+            //                    select new
+            //                    {
+            //                        idnota = NTM.Id,
+            //                        nota = NTM.Notas,
+            //                        idPeriodo = NTM.Periodo_Id,
+            //                        NombrePeriodo = PRD.NombreP
+            //                    }
+            //              )
+
+            //          }
+            //    );
+
+            return datos;
 
 
         }

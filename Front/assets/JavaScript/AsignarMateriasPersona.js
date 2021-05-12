@@ -25,13 +25,13 @@ function seleccionarPersona(select) {
 		personas.forEach((persona) => {
 			if (
 			  persona.Tp_Id == 2 &&
-			  htmlLocation == urlHost + "/views/asignar_materia_profesor.html" &&
+			  htmlLocation == urlHost + "/Front/views/asignar_materia_profesor.html" &&
 			  persona.Activo
 			) {
 			  select.innerHTML += `<option value = ${persona.Id}>  ${persona.Nombres} ${persona.Apellidos} </option>`;
 			} else if (
 			  persona.Tp_Id == 1 &&
-			  htmlLocation == urlHost + "/views/asignar_materia_alumno.html" &&
+			  htmlLocation == urlHost + "/Front/views/asignar_materia_alumno.html" &&
 			  persona.Activo
 			) {
 			  select.innerHTML += `<option value = ${persona.Id}>  ${persona.Nombres} ${persona.Apellidos} </option>`;
@@ -51,7 +51,7 @@ function llenarTabla(materias) {
     arrayMateria.push(materia);
     if (
       materia.TipoPersona == 2 &&
-      htmlLocation == urlHost + "/views/asignar_materia_profesor.html"
+      htmlLocation == urlHost + "/Front/views/asignar_materia_profesor.html"
     ) {
       html += `<tr id="tr" data-id="${materia.Id}">
           <td>${materia.NombrePersona}  ${materia.ApellidoPersona}</td>
@@ -64,7 +64,7 @@ function llenarTabla(materias) {
       tabla.innerHTML = html;
     } else if (
       materia.TipoPersona == 1 &&
-      htmlLocation == urlHost + "/views/asignar_materia_alumno.html"
+      htmlLocation == urlHost + "/Front/views/asignar_materia_alumno.html"
     ) {
       html += `<tr id="tr" data-id="${materia.Id}">
           <td>${materia.NombrePersona}  ${materia.ApellidoPersona}</td>

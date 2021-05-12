@@ -23,7 +23,7 @@ boton.addEventListener("click", () => {
   inputDocumento = document.getElementById("documento").value;
   Agregar(inputNombre, inputApellido, inputTipo, inputDocumento);
 });
-
+//http://127.0.0.1:5500/Front/views/alumnos.html
 function listarPersona() {
   EjecutarPeticionServidor(
     "Personas/ConsultarTodo",
@@ -33,12 +33,12 @@ function listarPersona() {
       personas.forEach((persona) => {
         if (
           persona.Tp_Id == 1 &&
-          htmlLocation == urlHost + "/views/alumnos.html"
+          htmlLocation == urlHost + "/Front/views/alumnos.html"
         ) {
           llenarTablaPersona(persona);
         } else if (
           persona.Tp_Id == 2 &&
-          htmlLocation == urlHost + "/views/maestros.html"
+          htmlLocation == urlHost + "/Front/views/maestros.html"
         ) {
           llenarTablaPersona(persona);
         }
@@ -55,7 +55,7 @@ function llenarTablaPersona(p) {
   <td>  ${p.TDoc_Id == 1 ? "CC" : "TI"}  </td>
   <td >  ${p.Activo ? "Activo" : "Inactivo"}  </td>`;
 	profe.innerHTML += `<td class="tdBoton ">
-  <button class="buttonEditar "onclick="AbrirEditar
+  <button class="btnEditar"onclick="AbrirEditar
 	(${p.Id},
 	${p.NDoc},
 	'${p.Nombres}',

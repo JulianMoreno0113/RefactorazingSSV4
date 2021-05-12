@@ -25,6 +25,6 @@ namespace SSV4.Models
         public double Porcentaje { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public  ICollection<NotasMateria> NotasMateria { get; set; }
+        public virtual ICollection<NotasMateria> NotasMateria { get; set; }
     }
 }

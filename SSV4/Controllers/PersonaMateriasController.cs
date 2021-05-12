@@ -21,23 +21,37 @@ namespace SSV4.Controllers
         // GET: api/PersonaMaterias
         public IQueryable GetPersonaMateria()
         {
-            var lst = (from a in db.PersonaMateria
-                       join b in db.Persona on a.Persona_Id equals b.Id
-                       join c in db.Materia on a.Materia_Id equals c.Id
+
+            var lst = db.PersonaMateria.Join(db.Persona, pm => pm.Persona_Id, p => p.Id, (pm, p) => 
+            new { pm,p }).Join(db.Materia, pm => pm.pm.Materia_Id,m=>m.Id,(pm,m)=>
+            new {pm,m }).Select(o=> new { 
+            Id = o.pm.pm.Id,
+            IdDocente= o.pm.pm.Id,
+            IdMateria= o.pm.pm.Materia_Id,
+            IdPersona = o.pm.pm.Persona_Id,
+            NombrePersona=o.pm.p.Nombres,
+            ApellidoPersona = o.pm.p.Apellidos,
+            Materia= o.m.Nombre,
+            TipoPersona= o.pm.p.Tp_Id
+            });
+
+            //var lst = (from a in db.PersonaMateria
+            //           join b in db.Persona on a.Persona_Id equals b.Id
+            //           join c in db.Materia on a.Materia_Id equals c.Id
 
 
 
-                       select new
-                       {
-                           Id = a.Id,
-                           IdDocente = a.Id,
-                           IdMateria = a.Materia_Id,
-                           IdPersona = a.Persona_Id,
-                           NombrePersona = b.Nombres,
-                           ApellidoPersona = b.Apellidos,
-                           Materia = c.Nombre,
-                           TipoPersona = b.Tp_Id
-                       });
+            //           select new
+            //           {
+            //               Id = a.Id,
+            //               IdDocente = a.Id,
+            //               IdMateria = a.Materia_Id,
+            //               IdPersona = a.Persona_Id,
+            //               NombrePersona = b.Nombres,
+            //               ApellidoPersona = b.Apellidos,
+            //               Materia = c.Nombre,
+            //               TipoPersona = b.Tp_Id
+            //           });
 
 
 

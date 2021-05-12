@@ -15,8 +15,8 @@
 .formulario__grupo {
 	width: 23%;
 }
-.formulario__asignar {
-	width: 40%;
+.formulario__asignar{
+    width: 40%;
 }
 .formulario__label {
 	display: block;
@@ -27,8 +27,7 @@
 	margin-bottom: 10px;
 }
 
-.formulario__input,
-select {
+.formulario__input, select{
 	width: 100%;
 	height: 40px;
 	background-color: #ffffff;
@@ -36,21 +35,22 @@ select {
 	border-radius: 3px;
 	transition: 0.3s ease all;
 }
-.selectAsignar {
-	width: 100%;
+.selectAsignar{
+    width: 100%;
 	height: 40px;
-	background-color: #ffffff;
+    background-color: #ffffff;
 	border: 1px solid gray;
-	border-radius: 3px;
-	margin-left: 0%;
+    border-radius: 3px;
+    margin-left: 0%;
 }
 .formulario__input:focus {
 	border: 3px solid #0075ff;
 	outline: none;
 	box-shadow: 3px 0px 30px rgba(163, 163, 163, 0.4);
 }
-.inputNota {
-	width: 90%;
+.inputNota{
+    width:90%;
+
 }
 .buttons input {
 	margin: auto;
@@ -92,13 +92,13 @@ select {
 	top: -32px;
 	margin-left: 93%;
 	color: #1ed12d;
-	opacity: 0;
+	opacity: 1;
 }
 .formulario__grupo-incorrecto .formulario__validacion-estado {
 	position: relative;
 	top: -32px;
 	margin-left: 93%;
-	z-index: 0;
+	z-index: 1;
 	color: #bb2929;
 	opacity: 1;
 }
@@ -175,8 +175,8 @@ td {
 	margin: 0;
 	font-size: 1.2vw;
 }
-.topTablaNota {
-	margin-top: 20px;
+.topTablaNota{
+    margin-top: 20px;
 }
 td {
 	font-size: 1rem;
@@ -186,8 +186,7 @@ td {
 }
 
 .buttonEditar,
-.buttonEliminar,
-.buttonVerReporte {
+.buttonEliminar, .buttonVerReporte {
 	width: 70px;
 	padding: 5px 2%;
 	margin: 0px;
@@ -205,10 +204,10 @@ button:disabled {
 .buttonEliminar {
 	background-color: #e9312a;
 }
-.buttonVerReporte {
-	background-color: #023859;
-	width: 100px;
-	border-color: #5ebbf5;
+.buttonVerReporte{
+    background-color: #023859;
+    width:100PX;
+    border-color: #5ebbf5;
 }
 
 /* ----------------------------------------------- */
@@ -223,7 +222,7 @@ button:disabled {
 .modalUpdate {
 	background-color: #ffffff;
 	position: fixed;
-	width: 500px;
+width: 40%;
 	top: 26%;
 
 	box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.7);
@@ -261,8 +260,7 @@ button:disabled {
 
 .contenedorInputsEditar input,
 .contenedorInputsEditar select {
-	height: 35px;
-	width: 100%;
+	padding: 5px 10px;
 	margin: 8px 0;
 	display: block;
 	border: 1px solid #ccc;
@@ -270,8 +268,7 @@ button:disabled {
 	box-sizing: border-box;
 }
 .contenedorInputsEditar select {
-	width: 100%;
-	padding: 0px 10px;
+	width: 190px;
 }
 .buttonsEditar {
 	margin-top: 15px;
@@ -288,18 +285,15 @@ button:disabled {
 #ButtonCloseEditar {
 	background-color: #df150e;
 	color: #f2f2f2;
-	width:7%;
-	font-size:1vw;
 }
 
 /* ---------------------------------------- */
 
 @media (max-width: 1000px) {
-	/* ESTILOS FORMULARIO */
-	.formulario__input {
+	.formulario__input  {
 		width: 80%;
 	}
-
+    
 	.contenedorInputs {
 		display: flex;
 		flex-wrap: wrap;
@@ -313,21 +307,6 @@ button:disabled {
 	select {
 		margin-left: -7%;
 	}
-	/* -------------------- */
-.contenedorInputsEditar {
-		display: flex;
-		flex-wrap: wrap;
-	}
-	.modalUpdate {
-		width: 70%;
-		
-	}
-	#ButtonCloseEditar {
-	
-	font-size:2vw;
-}
-	
-
 	td {
 		font-size: 0.8rem;
 	}
@@ -337,75 +316,65 @@ button:disabled {
 	body {
 		overflow-x: hidden;
 	}
-	.seccionFormulario {
-		width: 100%;
-	}
+    .seccionFormulario {
+	width: 100%;
+}
 	/* ESTILOS FORMULARIOS */
 	.contenedorInputs {
 		flex-direction: column;
 		align-items: center;
 	}
-
+    
 	.tituloForm {
 		font-size: 1.5rem;
 	}
 	.formulario__grupo {
 		width: 90%;
 	}
-	.formulario__asignar {
-		width: 90%;
-		margin-bottom: 20px;
-	}
-	select {
-		width: 100%;
-	}
-	.inputNota {
-		width: 50px;
-	}
-	/* ----------------- */
-	/* ESTILOS MODAL */
-	
-	.guardarCambios {
-		width: 90%;
-	}
-	.headerModal h2 {
-	font-size:5vw;
+    .formulario__asignar{
+    width: 90%;
+    margin-bottom: 20px;
 }
-.modalUpdate {
-		
-		top: 40px;
-	}
-	/* ----------------------- */
-	/* ESTILOS TABLAS */
-	.tituloTabla {
-		font-size: 1rem;
-	}
-	.seccionTabla {
-		width: 100%;
-	}
+     select{
+        width:100%;
+    }
+    .inputNota{
+    width:50px;
+
+}
+/* ESTILOS TABLAS */
+    .tituloTabla {
+	
+	font-size: 1rem;
+}
+.seccionTabla {
+	width: 100%;
+}
 	.tablaAlumnos {
 		display: block;
 		overflow-x: auto;
 	}
-	#BuscarId {
-		width: 83%;
-		border-radius: 20px;
-		border: none;
-		font-size: 2.5vw;
-		height: 20px;
-		margin-left: -30px;
-	}
+    #BuscarId {
+	width: 83%;
+	border-radius: 20px;
+	border: none;
+	font-size: 2.5vw;
+	height: 20px;
+	margin-left: -30px;
+}
 
-	.tablaAlumnos th,
-	td {
-		font-size: 3vw;
-	}
-	.tablaMaterias {
-		display: table;
+.tablaAlumnos th,
+td {
+	
+	font-size: 3vw;
+}
+.tablaMaterias{
+   display:table;
 		overflow-x: x;
-	}
-	.buttonVerReporte {
-		width: 90%;
-		font-size: 2.5vw;
-	}
+}
+.buttonVerReporte{
+    width:90%;
+    font-size:2.5vw;
+}
+
 }

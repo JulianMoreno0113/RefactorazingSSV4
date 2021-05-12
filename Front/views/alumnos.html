@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,154 +11,174 @@
     <link rel="icon" href="../assets/icons/School.ico">
     <title>Colegio Grande - Alumnos</title>
 </head>
+<!--  -->
 <body>
     <img class="Icono hamburguesa" src="../assets/icons/menu.svg" alt="">
     <main>
-<div class="contenedorNav">
-        <nav class="nav-bar ver">
-        <ul class="menu">
-           <a href="../index.html"> <li> <img src="../assets/icons/home 1.svg" alt="Icono Incio"> INICIO</li></a>
-           <a href="alumnos.html"><li> <img src="../assets/icons/sombrero-de-graduacion 1.svg" alt="Icono Alumnos"> ALUMNOS</li></a>
-            <a href="maestros.html"><li> <img src="../assets/icons/aula 1.svg" alt="Icono Maestros"> DOCENTES</li></a>
-            <li>
-                <a href="materias.html">
-                    <img src="../assets/icons/libro 1.svg" alt="Icono Materias"> 
-                    <span class="materias">MATERIAS</span>
-                </a>
-                <span class="abrirSubMenuResponsive"><img src="../assets/icons/caret-down.svg" alt="" class="flechaAbrirMenuResponsive"></span>
-                <ul class="submenu">
-                    <li><a href="asignar_materia_alumno.html"> Alumno</a></li>
-                    <li><a href="asignar_materia_profesor.html"> Docente</a></li>
+        <div class="contenedorNav">
+            <nav class="nav-bar ver">
+                <ul class="menu">
+                    <a href="../index.html">
+                        <li> <img src="../assets/icons/home 1.svg" alt="Icono Incio"> INICIO</li>
+                    </a>
+                    <a href="alumnos.html">
+                        <li> <img src="../assets/icons/sombrero-de-graduacion 1.svg" alt="Icono Alumnos"> ALUMNOS</li>
+                    </a>
+                    <a href="maestros.html">
+                        <li> <img src="../assets/icons/aula 1.svg" alt="Icono Maestros"> DOCENTES</li>
+                    </a>
+                    <li>
+                        <a href="materias.html">
+                            <img src="../assets/icons/libro 1.svg" alt="Icono Materias">
+                            <span class="materias">MATERIAS</span>
+                        </a>
+                        <span class="abrirSubMenuResponsive"><img src="../assets/icons/caret-down.svg" alt=""
+                                class="flechaAbrirMenuResponsive"></span>
+                        <ul class="submenu">
+                            <li><a href="asignar_materia_alumno.html"> Alumno</a></li>
+                            <li><a href="asignar_materia_profesor.html"> Docente</a></li>
+                        </ul>
+                    </li>
+                    <a href="notas.html">
+                        <li> <img src="../assets/icons/los-grados 1.svg" alt="Icono Notas"> NOTAS</li>
+                    </a>
+                    <a href="periodos.html">
+                        <li> <img src="../assets/icons/calendar.svg" alt="Icono Periodo"> PERIODOS</li>
+                    </a>
+                    <a href="reportes.html">
+                        <li> <img src="../assets/icons/lista-de-verificacion 1.svg" alt="Icono Reportes"> REPORTES</li>
+                    </a>
                 </ul>
-            </li>
-            <a href="notas.html"><li> <img src="../assets/icons/los-grados 1.svg" alt="Icono Notas"> NOTAS</li></a>
-            <a href="periodos.html"><li> <img src="../assets/icons/calendar.svg" alt="Icono Periodo"> PERIODOS</li></a>
-            <a href="reportes.html"><li> <img src="../assets/icons/lista-de-verificacion 1.svg" alt="Icono Reportes"> REPORTES</li></a>
-            </ul> 
-    </nav>
+            </nav>
         </div>
-        
-<div class="contenedorSection ver hidden">
-   
- <section class="seccionFormulario ">
-        <h1 class="tituloForm">Agregar Alumnos</h1>
-        <form action="" class="frm formulario" id="formulario">
-            <div class="contenedorInputs">
-                    <div class="formulario__grupo" id="grupo__nombre">
-                    <label for="nombre" class="formulario__label">Nombre:</label>
-                    <div class="formulario__grupo-input">
-                    <input type="text" id="nombre" class="formulario__input" name="nombre" placeholder="Escribe el Nombre">
-                    <i class="formulario__validacion-estado documento fas fa-times-circle"></i>
-                
-                <p class="formulario__input-error">El nombre debe tener al menos un digito y solo puede contener letras y espacios</p>
-                </div>
-                </div>
-                <div class="formulario__grupo" id="grupo__apellido">
-                    <label for="apellido" class="formulario__label">Apellido:</label>
-                    <div class="formulario__grupo-input">
-                    <input type="text" id="apellido" class="formulario__input" name="apellido" placeholder="Escribe el Apellido">
-                    <i class="formulario__validacion-estado documento fas fa-times-circle"></i>
-                </div>
-                <p class="formulario__input-error">El apellido debe tener al menos un digito y solo puede contener letras y espacios</p>
-                </div>
-                <div class="formulario__grupo" id="grupo__documento">
-                    <label for="documento" class="formulario__label">Identificación:</label>
-                    <div class="formulario__grupo-input">
-                    <input type="number" id="documento" class="formulario__input" name="documento" placeholder="Escribe la identificación">
-                    <i class="formulario__validacion-estado documento fas fa-times-circle"></i>
-                </div>
-                <p class="formulario__input-error">El documento solo acepta numeros y debe tener al menos siete digitos solo acepta numeros y menor a 10 digitos</p>
-            </div>
-                <div class="formulario__grupo">
-                        <label for="tipoId" class="formulario__label">Tipo Documento:</label>
-                        <div class="formulario__grupo-input">
-                        <select id="tipoId" class="formulario__input">
-                            <option>Seleccione...</option>
-                            <option value="1">CC</option>
-                            <option value="2">TI</option>
-                        </select>
+
+        <div class="contenedorSection ver hidden">
+
+            <section class="seccionFormulario ">
+                <h1 class="tituloForm">Agregar Alumnos</h1>
+                <form action="" class="frm formulario" id="formulario">
+                    <div class="contenedorInputs">
+                        <div class="formulario__grupo" id="grupo__nombre">
+                            <label for="nombre" class="formulario__label">Nombre:</label>
+                            <div class="formulario__grupo-input">
+                                <input type="text" id="nombre" class="formulario__input" name="nombre"
+                                    placeholder="Escribe el Nombre">
+                                <i class="formulario__validacion-estado documento fas fa-times-circle"></i>
+
+                                <p class="formulario__input-error">El nombre debe tener al menos un digito y solo puede
+                                    contener letras y espacios</p>
+                            </div>
+                        </div>
+                        <div class="formulario__grupo" id="grupo__apellido">
+                            <label for="apellido" class="formulario__label">Apellido:</label>
+                            <div class="formulario__grupo-input">
+                                <input type="text" id="apellido" class="formulario__input" name="apellido"
+                                    placeholder="Escribe el Apellido">
+                                <i class="formulario__validacion-estado documento fas fa-times-circle"></i>
+                            </div>
+                            <p class="formulario__input-error">El apellido debe tener al menos un digito y solo puede
+                                contener letras y espacios</p>
+                        </div>
+                        <div class="formulario__grupo" id="grupo__documento">
+                            <label for="documento" class="formulario__label">Identificación:</label>
+                            <div class="formulario__grupo-input">
+                                <input type="number" id="documento" class="formulario__input" name="documento"
+                                    placeholder="Escribe la identificación">
+                                <i class="formulario__validacion-estado documento fas fa-times-circle"></i>
+                            </div>
+                            <p class="formulario__input-error">El documento solo acepta numeros y debe tener al menos
+                                siete digitos solo acepta numeros y menor a 10 digitos</p>
+                        </div>
+                        <div class="formulario__grupo">
+                            <label for="tipoId" class="formulario__label">Tipo Documento:</label>
+                            <div class="formulario__grupo-input">
+                                <select id="tipoId" class="formulario__input">
+                                    <option>Seleccione...</option>
+                                    <option value="1">CC</option>
+                                    <option value="2">TI</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-            </div> 
-            <div class="buttons">
-                <input type="button" value="Agregar" id="btnAgregar" > 
-            </div>
-        </form>
-        <hr>
-    </section>
-  
-    <section class="seccionTabla ">
-        <div class="encabezadoTabla">
-            <h1 class="tituloTabla">Gestionar Alumnos</h1>
-            <div>
-                <input class="form-control col-md-6 light-table-filter" data-table="order-table" type="text"
-                    placeholder="Buscar..." id="BuscarId">
-            </div>
-        </div>
-        
-                    <table class="tablaAlumnos" >
-            <thead>
-                <tr>
-                <th>Identificación</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Tipo documento</th>
-                <th>Estado</th>
-                <th>Acción</th>
-                </tr>
-            </thead>
-            <tbody class="tbody"> 
+                    <div class="buttons">
+                        <input type="button" value="Agregar" id="btnAgregar">
+                    </div>
+                </form>
+                <hr>
+            </section>
 
-            </tbody>
-        </table>
-   
-    </section>
-    <section class="sectionModal">
-    <div class="modalUpdate">
-        <div class="headerModal">
-            <h2>Editar Alumno</h2>
-            <input type="button" value="X" class="cerrar" id="ButtonCloseEditar" onclick="CloseUpdate()"> 
-        </div>
-            <form class="frmEditar">
-                <div class="contenedorInputsEditar">
+            <section class="seccionTabla ">
+                <div class="encabezadoTabla">
+                    <h1 class="tituloTabla">Gestionar Alumnos</h1>
                     <div>
-                        <label for="nombre">Nombre:</label>
-                        <input type="text" id="nombreEditar" placeholder="Escribe el Nombre">
-                        <label for="apellido">Apellido:</label>
-                        <input type="text"id="apellidoEditar" placeholder="Escribe el Apellido">
-                        <label for="estado">Estado Actual:</label>
-                        <select id="estadoEditar">
-                            <option value="1">Activo</option>
-                            <option value="2">Inactivo</option>
-                        </select>
+                        <input class="form-control col-md-6 light-table-filter" data-table="order-table" type="text"
+                            placeholder="Buscar..." id="BuscarId">
                     </div>
-                    <div>
-                        <label for="documento">Documento:</label>
-                        <input type="number" id="documentoEditar"  placeholder="Escribe la identificacion">
-                        <label for="tipoId">Tipo Documento:</label>
-                        <select id="tipoIdEditar">
-                            <option>Selecione...</option>
-                            <option value="1">CC</option>
-                            <option value="2">TI</option>
-                        </select>
-                    </div>
-                </div> 
-                <div class="buttonsEditar">
-                    <input type="button" value="Guardar Cambios" class="guardarCambios"id="btnEditar"> 
                 </div>
-            </form>
-    </div>
-    </section>
-  </div>
+
+                <table class="tablaAlumnos">
+                    <thead>
+                        <tr>
+                            <th>Identificación</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Tipo documento</th>
+                            <th>Estado</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody">
+
+                    </tbody>
+                </table>
+
+            </section>
+            <section class="sectionModal">
+                <div class="modalUpdate">
+                    <div class="headerModal">
+                        <h2>Editar Alumno</h2>
+                        <input type="button" value="X" class="cerrar" id="ButtonCloseEditar" onclick="CloseUpdate()">
+                    </div>
+                    <form class="frmEditar">
+                        <div class="contenedorInputsEditar">
+                            <div>
+                                <label for="nombre">Nombre:</label>
+                                <input type="text" id="nombreEditar" placeholder="Escribe el Nombre">
+                                <label for="apellido">Apellido:</label>
+                                <input type="text" id="apellidoEditar" placeholder="Escribe el Apellido">
+                                <label for="estado">Estado Actual:</label>
+                                <select id="estadoEditar">
+                                    <option value="1">Activo</option>
+                                    <option value="2">Inactivo</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="documento">Documento:</label>
+                                <input type="number" id="documentoEditar" placeholder="Escribe la identificacion">
+                                <label for="tipoId">Tipo Documento:</label>
+                                <select id="tipoIdEditar">
+                                    <option>Selecione...</option>
+                                    <option value="1">CC</option>
+                                    <option value="2">TI</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="buttonsEditar">
+                            <input type="button" value="Guardar Cambios" class="guardarCambios" id="btnEditar">
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
 
     </main>
-    
-  
+
+
     <script src="../assets/JavaScript/request.js"></script>
     <script src="../assets/JavaScript/persona.js"></script>
-    <script src = " https://unpkg.com/sweetalert/dist/sweetalert.min.js " > </script>
+    <script src=" https://unpkg.com/sweetalert/dist/sweetalert.min.js "> </script>
     <script src="../assets/JavaScript/funcionesExternas.js"></script>
- <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
 </body>
-</html>
 
+</html>
