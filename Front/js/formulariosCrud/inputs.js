@@ -1,13 +1,45 @@
 export const crearInputsFormularios = function(nombre,apellido,numeroDoc,tipoDoc,periodo){
-    
+    function apellido (){const grupo_apellido = document.createElement("div");
+    grupo_apellido.classList.add("formulario__grupo");
+    grupo_apellido.id = "grupo__apellido";
+
+    const apellidoLabel = document.createElement('label');
+    apellidoLabel.for = "apellido";
+    apellidoLabel.classList.add("formulario__label");
+    apellidoLabel.innerText = 'Apellido:';
+    grupo_apellido.append(apellidoLabel)
+
+    const inputApellidoDiv = document.createElement("div")
+    inputApellidoDiv.classList.add('formulario__grupo-input');
+    grupo_apellido.append(inputApellidoDiv)
+
+    const inputApellido = document.createElement("input")
+    inputApellido.type = "text";
+    inputApellido.id = "apellido";
+    inputApellido.classList.add("formulario__input");
+    inputApellido.name = "apellido";
+    inputApellido.placeholder = "Escribe el apellido";
+    grupo_apellido.append(inputApellido)
+
+    const iconoApellido = document.createElement("i")
+    iconoApellido.classList.add("formulario__validacion-estado","documento","fas" ,"fa-times-circle")
+    grupo_apellido.append(iconoApellido)
+
+    const pApellido = document.createElement("p")
+    pApellido.classList.add("formulario__input-error");
+    pApellido.innerText = ('El apellido debe tener al menos un digito y solo puede contener letras y espacios');
+    inputApellidoDiv.append(pApellido);
+    return grupo_apellido;
+    }
+    function nombre(){
     const grupo_nombre = document.createElement("div");
     grupo_nombre.classList.add("formulario__grupo");
-    grupo_nombre.id = "grupo_nombre";
+    grupo_nombre.id = "grupo__nombre";
 
     const nombreLabel = document.createElement('label');
     nombreLabel.for = "nombre";
     nombreLabel.classList.add("formulario__label");
-    nombreLabel.innerText = 'Nombre';
+    nombreLabel.innerText = 'Nombre:';
     grupo_nombre.append(nombreLabel)
 
     const inputNombreDiv = document.createElement("div"); 
@@ -32,6 +64,7 @@ export const crearInputsFormularios = function(nombre,apellido,numeroDoc,tipoDoc
     inputNombreDiv.append(pNombre);
 
     return grupo_nombre;
+}
 
     // const nombreLabel = document.createElement('label');
     // nombreLabel.for = "nombre";
