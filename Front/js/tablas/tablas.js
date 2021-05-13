@@ -1,4 +1,5 @@
-export const crearTablasFormularios = function(elementos){
+export const crearTablasFormularios = function(texto){
+     
      const seccionTabla = document.createElement("section")
      seccionTabla.classList.add("seccionTabla")
 
@@ -8,17 +9,19 @@ export const crearTablasFormularios = function(elementos){
 
      const tituloTabla = document.createElement("h1")
      tituloTabla.classList.add("tituloTabla")
-     tituloTabla.innerText("Gestionar Periodos")
-     seccionTabla.append(tituloTabla)
+     tituloTabla.innerText="Gestionar "+ texto ;
+     encabezado.append(tituloTabla)
 
      const div = document.createElement("div")
-     seccionTabla.append(div)
+     encabezado.append(div)
 
      const inputTabla = document.createElement("input")
      inputTabla.classList.add("form-control","col-md-6","light-table-filter")
      inputTabla.setAttribute("data-table","order-table")
-     inputTabla.type("text")
-     inputTabla.placeholder("Buscar...")
-     inputTabla.id("BuscarId")
-     seccionTabla.append(inputTabla)
+     inputTabla.type="text"
+     inputTabla.placeholder="Buscar...";
+     inputTabla.id="BuscarId"
+     div.append(inputTabla)
+
+     document.querySelector(".contenedorSection").append(seccionTabla);
 }

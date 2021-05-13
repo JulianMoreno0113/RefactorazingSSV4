@@ -1,4 +1,6 @@
 import * as inputs from "../formulariosCrud/inputs.js";
+import * as tablas from "../tablas/tablas.js"
+
 export const crearEnlaces = function({texto,icono}){
     const a = document.createElement('a');
     // a.href = ruta;
@@ -37,6 +39,7 @@ export const crearEnlaces = function({texto,icono}){
     {
       const objeto = JSON.parse(li.dataset.elementos)
 			inputs.crearInputsFormularios(objeto)
+      tablas.crearTablasFormularios(texto)
     });
         
 
