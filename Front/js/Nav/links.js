@@ -1,7 +1,7 @@
-import * as inputs from "../formulariosCrud/inputs.js"
-export const crearEnlaces = function({texto,ruta,icono}){
+import * as inputs from "../formulariosCrud/inputs.js";
+export const crearEnlaces = function({texto,icono}){
     const a = document.createElement('a');
-    a.href = ruta;
+    // a.href = ruta;
     const li = document.createElement('li');
 
     
@@ -12,12 +12,33 @@ export const crearEnlaces = function({texto,ruta,icono}){
     a.append(texto);
 
     li.append(a);
-    if(texto=="Materias"){
-        li.id = texto
-       CrearSubMenuMaterias(li);
-       li.dataset.elementos = JSON.stringify([{inputs:1,select:0}]);
-    }
-    li.addEventListener('click',()=>inputs.crearInputsFormularios(li.dataset.elementos))
+    switch (texto) {
+			case "Docentes":
+			case "Alumnos":
+				li.id = texto;
+				li.dataset.elementos = JSON.stringify([
+					"nombre",
+					"apellido",
+					"numeroDoc",
+					"tipoDoc"
+				]);
+				break;
+			case "Materias":
+				li.id = texto;
+				CrearSubMenuMaterias(li);
+				li.dataset.elementos = JSON.stringify(["nombre"]);
+				break;
+			case "Periodos":
+				li.id = texto;
+				li.dataset.elementos = JSON.stringify(["nombre", "porcentaje"]);
+				break;
+		}
+    li.addEventListener("click", () =>
+    {
+      const objeto = JSON.parse(li.dataset.elementos)
+			inputs.crearInputsFormularios(objeto)
+    });
+        
 
     return li;
 }
