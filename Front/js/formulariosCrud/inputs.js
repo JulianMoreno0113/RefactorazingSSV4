@@ -74,6 +74,9 @@ export const crearInputsFormularios = function (elementos) {
 	botonAgregar.type = "button";
 	botonAgregar.value = "Agregar";
 	botonAgregar.id = "btnAgregar";
+
+	const hr = document.createElement("hr")
+	seccionFormulario.append(hr)
 	divBotonAgregar.append(botonAgregar)
 	console.log(contenedorSection);
 	return contenedorSection;
