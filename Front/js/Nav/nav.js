@@ -1,4 +1,7 @@
 import * as enlaces from "./links.js"
+import {listarMateria}  from "../../assets/JavaScript/Materia.js"
+import {ListarPeriodo}  from "../../assets/JavaScript/Periodos.js"
+
 
 export const crearNav = function(){
 
@@ -12,13 +15,26 @@ export const crearNav = function(){
 
 
         const listaEnlaces = [
-            {texto:"inicio",ruta:"index.html",icono:"home 1.svg"},
-            {texto:"Alumnos",ruta:"views/alumnos.html",icono:"sombrero-de-graduacion 1.svg"},
-            {texto:"Docentes",ruta:"views/maestros.html",icono:"aula 1.svg"},
-            {texto:"Materias",ruta:"views/materias.html",icono:"libro 1.svg"},
-            {texto:"Notas",ruta:"views/notas.html",icono:"los-grados 1.svg"},
-            {texto:"Periodos",ruta:"views/periodos.html",icono:"periodos.svg"},
-            {texto:"Reportes",ruta:"views/reportes.html",icono:"lista-de-verificacion 1.svg"}
+            {texto:"inicio",icono:"home 1.svg"},
+            {texto:"Alumnos",icono:"sombrero-de-graduacion 1.svg",  data:[
+                "nombre",
+                "apellido",
+                "numeroDoc",
+                "tipoDoc"
+              ]},
+            {texto:"Docentes",icono:"aula 1.svg", data:[
+                "nombre",
+                "apellido",
+                "numeroDoc",
+                "tipoDoc"
+              ]},
+            {texto:"Materias", cargar:listarMateria,icono:"libro 1.svg",data:["nombre"], submenus:[
+                {texto:"Profesor",cargar:ListarPeriodo,icono:"periodos.svg", data:["nombre", "porcentaje"]},
+                {texto:"Alumno",cargar:ListarPeriodo,icono:"periodos.svg", data:["nombre", "porcentaje"]}
+            ]},
+            {texto:"Notas",icono:"los-grados 1.svg"},
+            {texto:"Periodos",cargar:ListarPeriodo,icono:"periodos.svg", data:["nombre", "porcentaje"]},
+            {texto:"Reportes",icono:"lista-de-verificacion 1.svg"}
         ];
 
         const htmlListas = listaEnlaces.map(enlaces.crearEnlaces);

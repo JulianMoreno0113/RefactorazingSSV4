@@ -1,4 +1,3 @@
-const tabla = document.querySelector(".tbody");
 const botonAgg = document.getElementById("btnAgregar");
 const inputNombre = document.getElementById("nombre");
 const inputId = document.getElementById("idPeriodo");
@@ -14,28 +13,28 @@ let valorPorcentajeTemp = 0;
 const urlHost = "http://localhost:52811"
 //const urlApi = "https://localhost:44351";
 
-botonAgg.addEventListener("click", () => {
-	if(inputNombre.value == "" 
-	|| inputNombre.value == null || inputNombre.value == undefined || parseInt(porcentaje.value) <=0
-	|| porcentaje.value == null || porcentaje.value == undefined){
-	swal(
-        "¡Transacción Fallida! ",
-        "-Error el porcentaje es incorrecto \n -Campos Vacíos",
-        "error"
-    );}else
-	{Agregar(inputNombre.value,porcentaje.value)};
-});
+// botonAgg.addEventListener("click", () => {
+// 	if(inputNombre.value == "" 
+// 	|| inputNombre.value == null || inputNombre.value == undefined || parseInt(porcentaje.value) <=0
+// 	|| porcentaje.value == null || porcentaje.value == undefined){
+// 	swal(
+//         "¡Transacción Fallida! ",
+//         "-Error el porcentaje es incorrecto \n -Campos Vacíos",
+//         "error"
+//     );}else
+// 	{Agregar(inputNombre.value,porcentaje.value)};
+// });
 
 
-function ListarPeriodo() {
+export function ListarPeriodo(tbody) {
 	EjecutarPeticionServidor("Periodoes","GET",null,function(periodos){
 		periodos.forEach((periodo) => {
-			LlenarTabla(periodo);
+			LlenarTabla(periodo,tbody);
 		})
 	})
 }
 
-function LlenarTabla(m) {
+function LlenarTabla(m,tabla) {
 	let nMateria = document.createElement("tr");
 
 	nMateria.innerHTML += `<td>${m.NombreP} </td>
@@ -46,7 +45,7 @@ function LlenarTabla(m) {
 	nMateria.innerHTML += `<td class="tdBoton "><button class="buttonEditar "onclick="AbrirEditar(${m.Id},'${m.NombreP}',${m.Porcentaje})">Editar</button>
     <button class=" buttonEliminar" onclick="ConfirmarEliminar(${m.Id})">Eliminar</button></td>`;
 	tabla.appendChild(nMateria);
-	inputNombre.value = "";
+	// inputNombre.value = "";
 }
 
 function Agregar(nombre,porcentaje) {
@@ -126,27 +125,27 @@ function ConfirmarEliminar(id){
 	  });
 }
 
-porcentajeEditar.addEventListener("keyup",()=>{
-	if((totalArregloPorcentaje-valorPorcentajeTemp)+parseInt(porcentajeEditar.value)<101 || parseInt(porcentaje.value) < 0){
-		porcentajeEditar.style.border = "2px solid green"
-		btnGuardarPeriodo.disabled = false;
-		btnGuardarPeriodo.style.backgroundColor="#023859"
-	}else{
-		porcentajeEditar.style.border = "2px solid red"
-		btnGuardarPeriodo.disabled = true;
-		btnGuardarPeriodo.style.backgroundColor="#658294"
-	}
-})
+// porcentajeEditar.addEventListener("keyup",()=>{
+// 	if((totalArregloPorcentaje-valorPorcentajeTemp)+parseInt(porcentajeEditar.value)<101 || parseInt(porcentaje.value) < 0){
+// 		porcentajeEditar.style.border = "2px solid green"
+// 		btnGuardarPeriodo.disabled = false;
+// 		btnGuardarPeriodo.style.backgroundColor="#023859"
+// 	}else{
+// 		porcentajeEditar.style.border = "2px solid red"
+// 		btnGuardarPeriodo.disabled = true;
+// 		btnGuardarPeriodo.style.backgroundColor="#658294"
+// 	}
+// })
 
-btnGuardarPeriodo.addEventListener("click", (e) => {
-		Editar(inputId.value, nombreEditar.value,porcentajeEditar.value);
-		swal("Transacción Exitosa","El periodo fue editado correctamente", {
-			icon: "success",
-		})
-})
+// btnGuardarPeriodo.addEventListener("click", (e) => {
+// 		Editar(inputId.value, nombreEditar.value,porcentajeEditar.value);
+// 		swal("Transacción Exitosa","El periodo fue editado correctamente", {
+// 			icon: "success",
+// 		})
+// })
 
 
-porcentajePeriodo.addEventListener("keyup",()=>{validarPorcentaje(porcentajePeriodo)})
+// porcentajePeriodo.addEventListener("keyup",()=>{validarPorcentaje(porcentajePeriodo)})
 
 function validarPorcentaje(porcentajePeriodo){
 	console.log(porcentajePeriodo)

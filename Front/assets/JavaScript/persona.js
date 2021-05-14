@@ -16,14 +16,17 @@ let estadoEditar = document.getElementById("estadoEditar");
 let htmlLocation = window.location;
 
 const urlHost = "http://127.0.0.1:5500";
-boton.addEventListener("click", () => {
+
+  boton.addEventListener("click", () => {
   inputNombre = document.getElementById("nombre").value;
   inputApellido = document.getElementById("apellido").value;
   inputTipo = parseInt(document.getElementById("tipoId").value);
   inputDocumento = document.getElementById("documento").value;
   Agregar(inputNombre, inputApellido, inputTipo, inputDocumento);
 });
+
 //http://127.0.0.1:5500/Front/views/alumnos.html
+
 function listarPersona() {
   EjecutarPeticionServidor(
     "Personas/ConsultarTodo",

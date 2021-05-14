@@ -1,4 +1,5 @@
-export const crearTablasFormularios = function(texto){
+
+export const crearTablasFormularios = await function(texto,objeto, cargar){
      
      const seccionTabla = document.createElement("section")
      seccionTabla.classList.add("seccionTabla")
@@ -22,6 +23,29 @@ export const crearTablasFormularios = function(texto){
      inputTabla.placeholder="Buscar...";
      inputTabla.id="BuscarId"
      div.append(inputTabla)
+     const tabla = document.createElement("table");
+     tabla.classList.add("tablaAlumnos")
+     const thead= document.createElement("thead");
+     const tr = document.createElement("tr")
+     tabla.append(thead)
 
+     for (let index = 0; index < objeto.length; index++) {
+          let th = document.createElement("th");
+          th.innerText=objeto[index];
+          tr.append(th)
+          thead.append(tr);
+     }
+     const thAcciones= document.createElement("th");
+     thAcciones.innerText="Acciones"
+     tr.append(thAcciones);
+
+     const tbody=document.createElement("tbody");
+     tbody.classList.add("tbody");
+     tabla.append(tbody)
+     cargar(tbody);
+
+     
+     seccionTabla.append(tabla)
      document.querySelector(".contenedorSection").append(seccionTabla);
+     
 }

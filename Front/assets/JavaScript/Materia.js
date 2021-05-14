@@ -1,49 +1,51 @@
-const tabla = document.querySelector(".tbody");
+
 
 const boton = document.getElementById("ButtonAdd");
-const inputNombre = document.getElementById("nombre");
-const inputId = document.getElementById("idMateria");
-const nombreEditar = document.getElementById("nombreEditar");
+// const inputNombre = document.getElementById("nombre");
+// const inputId = document.getElementById("idMateria");
+// const nombreEditar = document.getElementById("nombreEditar");
 const btnGuardarMateria = document.getElementById("ButtonAddEditar");
 const arrayMaterias = [];
 
-btnGuardarMateria.addEventListener("click", () => {
-  Editar(inputId.value, nombreEditar.value);
-});
+// btnGuardarMateria.addEventListener("click", () => {
+//   Editar(inputId.value, nombreEditar.value);
+// });
 
-function listarMateria() {
+ export function listarMateria(tbody) {
+  
   EjecutarPeticionServidor("Materias", "GET", null, function (materias) {
     materias.forEach((materia) => {
       arrayMaterias.push(materia.Nombre);
-      llenarTabla(materia);
+      llenarTabla(materia,tbody);
     });
   });
 }
 
-boton.addEventListener("click", (e) => {
-  if (
-    arrayMaterias.some((materias) => inputNombre.value == materias) ||
-    inputNombre.value == "" ||
-    inputNombre.value == null ||
-    inputNombre.value == undefined
-  ) {
-    e.preventDefault();
-    swal(
-      "¡Transaccion Fallida! ",
-      "Campos Vacios",
-      "error"
-    );
-    inputNombre.value = "";
-  } else {
-    e.preventDefault();
-    Agregar(inputNombre.value),
-      swal("¡Transaccion Exitosa! ", "-Has Agregado un Materia", "success");
-    inputNombre.value = "";
-  }
-});
+// boton.addEventListener("click", (e) => {
+//   if (
+//     arrayMaterias.some((materias) => inputNombre.value == materias) ||
+//     inputNombre.value == "" ||
+//     inputNombre.value == null ||
+//     inputNombre.value == undefined
+//   ) {
+//     e.preventDefault();
+//     swal(
+//       "¡Transaccion Fallida! ",
+//       "Campos Vacios",
+//       "error"
+//     );
+//     inputNombre.value = "";
+//   } else {
+//     e.preventDefault();
+//     Agregar(inputNombre.value),
+//       swal("¡Transaccion Exitosa! ", "-Has Agregado un Materia", "success");
+//     inputNombre.value = "";
+//   }
+// });
 
 //visualizarInformación
-function llenarTabla(materia) {
+ function llenarTabla(materia,tabla) {
+  console.log(tabla)
   let filaMateria = document.createElement("tr");
 
   filaMateria.innerHTML += "<td>" + materia.Nombre + "</td>";
@@ -51,7 +53,7 @@ function llenarTabla(materia) {
   filaMateria.innerHTML += `<td class="tdBoton "><button class="buttonEditar "onclick="AbrirEditar(${materia.Id},'${materia.Nombre}')">Editar</button>
     <button class=" buttonEliminar" onclick="ConfirmarEliminar(${materia.Id})">Eliminar</button></td>`;
   tabla.appendChild(filaMateria);
-  inputNombre.value = "";
+  // inputNombre.value = "";
 }
 
 function Agregar(nombreMateria) {

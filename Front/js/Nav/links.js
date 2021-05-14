@@ -1,78 +1,54 @@
 import * as inputs from "../formulariosCrud/inputs.js";
-import * as tablas from "../tablas/tablas.js"
+import * as tablas from "../tablas/tablas.js";
 
-export const crearEnlaces = function({texto,icono}){
-    const a = document.createElement('a');
-    // a.href = ruta;
-    const li = document.createElement('li');
+export const crearEnlaces = function ({ texto, cargar, icono, data, submenus }) {
+  const li = s5("<li>");
+  const img = s5("<img>", { src: "assets/icons/" + icono });
 
-    
-    const img = document.createElement('img');
-    img.setAttribute('src','assets/icons/'+icono);
+  li.insert(img);
+  li.append(texto);
 
-    a.append(img);
-    a.append(texto);
 
-    li.append(a);
-    switch (texto) {
-			case "Docentes":
-			case "Alumnos":
-				li.id = texto;
-				li.dataset.elementos = JSON.stringify([
-					"nombre",
-					"apellido",
-					"numeroDoc",
-					"tipoDoc"
-				]);
-				break;
-			case "Materias":
-				li.id = texto;
-				CrearSubMenuMaterias(li);
-				li.dataset.elementos = JSON.stringify(["nombre"]);
-				break;
-			case "Periodos":
-				li.id = texto;
-				li.dataset.elementos = JSON.stringify(["nombre", "porcentaje"]);
-				break;
-		}
-    li.addEventListener("click", () =>
-    {
-      const objeto = JSON.parse(li.dataset.elementos)
-			inputs.crearInputsFormularios(objeto)
-      tablas.crearTablasFormularios(texto)
-    });
-        
+   if(submenus?.length >0)
+    {  
+      const submenu = s5("<ul>",{class: "submenu"}).insertTo(li);
+      submenus.forEach(function(menu){
+        CrearLi(submenu,menu.texto)
+      })
+      
+    }
+     
+  li.addEvent("click", () => {
+    inputs.crearInputsFormularios(data, texto);
+    tablas.crearTablasFormularios(texto, data, cargar);
+  });
 
-    return li;
+  return li;
+};
+
+function CrearLi(ulPapa, texto){
+  const liMateriaAlumno = s5("<li>").insertTo(ulPapa);
+  liMateriaAlumno.append(texto);
 }
 
-function CrearSubMenuMaterias(liPapa){
+function CrearSubMenuMaterias(liPapa, texto) {
+  const abrirSubMenuResponsive = s5("<span>", {
+    class: "abrirSubMenuResponsive",
+  })
+    .insert(
+      s5("<img>", {
+        class: "flechaAbrirMenuResponsive",
+        src: "assets/icons/caret-down.svg",
+      })
+    )
+    .insertTo(liPapa);
 
-        const abrirSubMenuResponsive = document.createElement('span');
-        abrirSubMenuResponsive.classList.add("abrirSubMenuResponsive");
-        liPapa.append(abrirSubMenuResponsive)
+  const submenu = s5("<ul>",{class: "submenu"}).insertTo(liPapa);
 
-        const flechaAbrirMenuResponsive = document.createElement('img');
-        flechaAbrirMenuResponsive.classList.add("flechaAbrirMenuResponsive");
-        flechaAbrirMenuResponsive.src = "assets/icons/caret-down.svg";
-        abrirSubMenuResponsive.append(flechaAbrirMenuResponsive);
+  const liMateriaAlumno = s5("<li>");
+  liMateriaAlumno.append("Alumno");
 
-        const submenu = document.createElement('ul');
-        submenu.classList.add("submenu");
-        liPapa.append(submenu)
-
-        const liMateriaAlumno = document.createElement("li");
-        const aMateriaAlumno = document.createElement("a");
-        aMateriaAlumno.href = "views/asignar_materia_alumno.html";
-        aMateriaAlumno.append("Alumno");
-        liMateriaAlumno.append(aMateriaAlumno);
-        submenu.append(liMateriaAlumno);
-
-        const liMateriaProfesor = document.createElement("li");
-        const aMateriaProfesor = document.createElement("a");
-        aMateriaProfesor.href = "views/asignar_materia_profesor.html";
-        aMateriaProfesor.append("Profesor");
-        liMateriaProfesor.append(aMateriaProfesor);
-        submenu.append(liMateriaProfesor);
-
+  const liMateriaProfesor = s5("<li>");
+  liMateriaProfesor.append("Profesor");
+  submenu.insert([ liMateriaAlumno , liMateriaProfesor]);
 }
