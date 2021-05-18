@@ -11,7 +11,7 @@ let habilitar=false;
 
 
 
-function listarThead(url) {
+export function listarThead(url) {
   EjecutarPeticionServidor(url,"GET",null,function(periodos){
     theadperiodos(periodos);
     listarNotas(periodos);
@@ -21,10 +21,10 @@ function listarThead(url) {
 
 
 
-async function listarNotas(arrayperiodos) {
+export async function listarNotas(arrayperiodos) {
   await EjecutarPeticionServidor("Personas/alumnos/materias/notas","GET",null,function(notas){
     llenarTabla(notas, arrayperiodos); 
-  })   
+})   
 }
 
 function theadperiodos(periodos) {
@@ -67,12 +67,10 @@ function llenarTabla(notas, periodos) {
     return td;
   }
    let html = " ";
-
+let tbody = document.querySelector(".tbodyNotas")
    for (let i = 0; i < notas.length; i++) {
       let tr = document.createElement("tr");
-      tr.setAttribute("data-id",notas[i].idPersona);
-      tabla.appendChild(tr);
-
+      tr.setAttribute("data-id",notas[i].idPM);
       tr.appendChild(crearTd(notas[i].nombrePersona));
       tr.appendChild(crearTd(notas[i].nombreMateria));
         for (let j = 0; j < periodos.length; j++) {
@@ -86,51 +84,51 @@ function llenarTabla(notas, periodos) {
               input_nota.setAttribute("type","number");
               input_nota.setAttribute("class", "inputNota");
               input_nota.value = nota;
-              input_nota.addEventListener('keyup',function() {
+              // input_nota.addEventListener('keyup',function() {
 
-                if(this.value<0||this.value >100){
-                  this.style.border='3px solid #bb2929'
-                  habilitar=false
-                }else{
-                  this.style.border='3px solid #1ed12d'
-                  habilitar=true
-                }
+              //   if(this.value<0||this.value >100){
+              //     this.style.border='3px solid #bb2929'
+              //     habilitar=false
+              //   }else{
+              //     this.style.border='3px solid #1ed12d'
+              //     habilitar=true
+              //   }
 
-                if(this.value != nota){
-                  let cambiosActuales = JSON.parse(botonEditar.dataset.changes) ;
-                  validarArray(cambiosActuales, {idNota: idnota, nota: this.value, idPM: idPM, idPeriodo: idPeriodo}); 
-                  botonEditar.dataset.changes = JSON.stringify(cambiosActuales);
-                  botonEditar.disabled = false; 
+              //   if(this.value != nota){
+              //     let cambiosActuales = JSON.parse(botonEditar.dataset.changes) ;
+              //     validarArray(cambiosActuales, {idNota: idnota, nota: this.value, idPM: idPM, idPeriodo: idPeriodo}); 
+              //     botonEditar.dataset.changes = JSON.stringify(cambiosActuales);
+              //     botonEditar.disabled = false; 
 
-                }
-              })
+              //   }
+              // })
 
               td_nota.appendChild(input_nota);
               tr.appendChild(td_nota);
             }  
-
+            tbody.appendChild(tr);
        let botonEditar=document.createElement("button");
        botonEditar.dataset.changes=JSON.stringify([]);
        botonEditar.classList.add("buttonEditar");
        botonEditar.innerHTML = "Guardar";
        botonEditar.disabled=true;
-       botonEditar.addEventListener('click',function(){
-         if (habilitar){
-          let cambios = JSON.parse(this.dataset.changes);
-          cambios.forEach(function(item){
-           if(!!item.idNota){
-             Editar(item);
-             botonEditar.disabled=true;
-           }else{
-             Agregar(item);
-           }
-          })
-         }else{
-           alertify.error("Rellene los datos correctamente")
-         }
+      //  botonEditar.addEventListener('click',function(){
+      //    if (habilitar){
+      //     let cambios = JSON.parse(this.dataset.changes);
+      //     cambios.forEach(function(item){
+      //      if(!!item.idNota){
+      //        Editar(item);
+      //        botonEditar.disabled=true;
+      //      }else{
+      //        Agregar(item);
+      //      }
+      //     })
+      //    }else{
+      //      alertify.error("Rellene los datos correctamente")
+      //    }
         
             
-       });
+      //  });
 
        let acciones = crearTd("");
        acciones.appendChild(botonEditar)

@@ -41,7 +41,7 @@ function seleccionarPersona(select) {
 	})
 
 }
-async function consultar() {
+export async function consultar() {
   await EjecutarPeticionServidor("PersonaMaterias", "GET", null, llenarTabla);
 }
 
@@ -186,19 +186,19 @@ seleccionarPersona(nombrePersona);
 seleccionarMateria(nombreMateria);
 seleccionarPersona(personaEditar);
 seleccionarMateria(MateriaEditar);
-boton.addEventListener("click", () => {
-  validarRepeticion(nombrePersona.value, nombreMateria.value);
-});
-btnEditarPersona.addEventListener("click", () => {
-  arrayMateria.some(
-    (personaMateria) =>
-      personaMateria.IdPersona == personaEditar.value &&
-      personaMateria.IdMateria == MateriaEditar.value
-  ) == true
-    ? swal(
-        "¡Transacción Fallida! ",
-        "-No puedes editar esta persona porque ya tiene esa materia asignada",
-        "error"
-      )
-    : Editar(idMateriaPersona.value, personaEditar.value, MateriaEditar.value);
-});
+// boton.addEventListener("click", () => {
+//   validarRepeticion(nombrePersona.value, nombreMateria.value);
+// });
+// btnEditarPersona.addEventListener("click", () => {
+//   arrayMateria.some(
+//     (personaMateria) =>
+//       personaMateria.IdPersona == personaEditar.value &&
+//       personaMateria.IdMateria == MateriaEditar.value
+//   ) == true
+//     ? swal(
+//         "¡Transacción Fallida! ",
+//         "-No puedes editar esta persona porque ya tiene esa materia asignada",
+//         "error"
+//       )
+//     : Editar(idMateriaPersona.value, personaEditar.value, MateriaEditar.value);
+// });

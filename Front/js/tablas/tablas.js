@@ -1,4 +1,4 @@
-
+import * as notas from "../../assets/JavaScript/Notas.js"
 export const crearTablasFormularios = await function(texto,objeto, cargar){
      
      const seccionTabla = document.createElement("section")
@@ -46,6 +46,42 @@ export const crearTablasFormularios = await function(texto,objeto, cargar){
 
      
      seccionTabla.append(tabla)
-     document.querySelector(".contenedorSection").append(seccionTabla);
+     document.querySelector(".contenedorSection").append(seccionTabla);  
+}
+export function tablaNotas(){
      
+const seccionTabla = document.createElement("section")
+seccionTabla.classList.add("seccionTabla")
+seccionTabla.innerHTML = " ";
+const encabezado = document.createElement("div")
+encabezado.classList.add("encabezadoTabla")
+seccionTabla.append(encabezado)
+
+const tituloTabla = document.createElement("h1")
+tituloTabla.classList.add("tituloTabla")
+tituloTabla.innerText="Gestionar Notas";
+encabezado.append(tituloTabla)
+
+const div = document.createElement("div")
+encabezado.append(div)
+
+const inputTabla = document.createElement("input")
+inputTabla.classList.add("form-control","col-md-6","light-table-filter")
+inputTabla.setAttribute("data-table","order-table")
+inputTabla.type="text"
+inputTabla.placeholder="Buscar...";
+inputTabla.id="BuscarId"
+div.append(inputTabla)
+const tabla = document.createElement("table");
+tabla.classList.add("tablaAlumnos")
+const thead= document.createElement("thead");
+const tbody = document.createElement("tbody");
+tbody.classList.add("tbodyNotas");
+thead.classList.add("theadNotas")
+tabla.append(thead)
+tabla.append(tbody)
+notas.listarThead("periodoes")
+notas.listarNotas();
+seccionTabla.append(tabla)
+document.querySelector(".contenedorSection").append(seccionTabla);
 }

@@ -54,6 +54,7 @@ const arrayMaterias = [];
     <button class=" buttonEliminar" onclick="ConfirmarEliminar(${materia.Id})">Eliminar</button></td>`;
   tabla.appendChild(filaMateria);
   // inputNombre.value = "";
+  // console.clear();
 }
 
 function Agregar(nombreMateria) {

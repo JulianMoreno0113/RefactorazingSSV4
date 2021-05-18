@@ -17,17 +17,17 @@ let htmlLocation = window.location;
 
 const urlHost = "http://127.0.0.1:5500";
 
-  boton.addEventListener("click", () => {
-  inputNombre = document.getElementById("nombre").value;
-  inputApellido = document.getElementById("apellido").value;
-  inputTipo = parseInt(document.getElementById("tipoId").value);
-  inputDocumento = document.getElementById("documento").value;
-  Agregar(inputNombre, inputApellido, inputTipo, inputDocumento);
-});
+//   boton.addEventListener("click", () => {
+//   inputNombre = document.getElementById("nombre").value;
+//   inputApellido = document.getElementById("apellido").value;
+//   inputTipo = parseInt(document.getElementById("tipoId").value);
+//   inputDocumento = document.getElementById("documento").value;
+//   Agregar(inputNombre, inputApellido, inputTipo, inputDocumento);
+// });
 
 //http://127.0.0.1:5500/Front/views/alumnos.html
 
-function listarPersona() {
+export function listarPersona() {
   EjecutarPeticionServidor(
     "Personas/ConsultarTodo",
     "GET",
@@ -116,16 +116,16 @@ function AbrirEditar(id, nDoc, nombres, apellidos, tDoc, estado) {
   apellidoEditar.value = apellidos;
   tipoIdEditar.value = tDoc;
   estadoEditar.value = estado;
-  btnGuardarMateria.addEventListener("click", () => {
-    Editar(
-      id,
-      documentoEditar.value,
-      nombreEditar.value,
-      apellidoEditar.value,
-      tipoIdEditar.value,
-      estadoEditar.value
-    );
-  });
+  // btnGuardarMateria.addEventListener("click", () => {
+  //   Editar(
+  //     id,
+  //     documentoEditar.value,
+  //     nombreEditar.value,
+  //     apellidoEditar.value,
+  //     tipoIdEditar.value,
+  //     estadoEditar.value
+  //   );
+  // });
 }
 
 function Editar(id, nDoc, nombres, apellidos, tDoc, estado) {

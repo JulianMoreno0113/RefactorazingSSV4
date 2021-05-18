@@ -1,3 +1,4 @@
+
 export const crearInputsFormularios = function (elementos) {
   const contenedorSection = document.querySelector(".contenedorSection");
   contenedorSection.innerHTML = "";
@@ -116,6 +117,5 @@ export const crearInputsFormularios = function (elementos) {
   const hr = document.createElement("hr");
   seccionFormulario.append(hr);
   divBotonAgregar.append(botonAgregar);
-  console.log(contenedorSection);
   return contenedorSection;
 };
