@@ -1,10 +1,13 @@
+import * as validacion from "../../assets/JavaScript/validaciones.js";
 
 export const crearInputsFormularios = function (elementos) {
+  
+  
   const contenedorSection = document.querySelector(".contenedorSection");
   contenedorSection.innerHTML = "";
 
   const seccionFormulario = document.createElement("section");
-  seccionFormulario.classList.add("seccionFormulario");
+  seccionFormulario.classList.add("seccionFormulario", "ver", "hidden");
   contenedorSection.append(seccionFormulario);
   seccionFormulario.innerHTML = "";
 
@@ -117,5 +120,8 @@ export const crearInputsFormularios = function (elementos) {
   const hr = document.createElement("hr");
   seccionFormulario.append(hr);
   divBotonAgregar.append(botonAgregar);
+  
+
   return contenedorSection;
 };
+validacion.ejemplo();

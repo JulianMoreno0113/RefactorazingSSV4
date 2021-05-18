@@ -7,7 +7,8 @@ import {listarThead}  from "../../assets/JavaScript/Notas.js"
 import {listarAlumno}  from "../../assets/JavaScript/reportes.js"
 import * as validacion from "../../assets/JavaScript/validaciones.js";
 
-validacion.validacionesInputs();
+
+validacion.ejemplo()
 
 export const crearNav = function(){
 
