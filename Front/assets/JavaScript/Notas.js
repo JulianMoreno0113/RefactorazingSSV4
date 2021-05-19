@@ -84,24 +84,24 @@ let tbody = document.querySelector(".tbodyNotas")
               input_nota.setAttribute("type","number");
               input_nota.setAttribute("class", "inputNota");
               input_nota.value = nota;
-              // input_nota.addEventListener('keyup',function() {
+              input_nota.addEventListener('keyup',function() {
 
-              //   if(this.value<0||this.value >100){
-              //     this.style.border='3px solid #bb2929'
-              //     habilitar=false
-              //   }else{
-              //     this.style.border='3px solid #1ed12d'
-              //     habilitar=true
-              //   }
+                if(this.value<0||this.value >100){
+                  this.style.border='3px solid #bb2929'
+                  habilitar=false
+                }else{
+                  this.style.border='3px solid #1ed12d'
+                  habilitar=true
+                }
 
-              //   if(this.value != nota){
-              //     let cambiosActuales = JSON.parse(botonEditar.dataset.changes) ;
-              //     validarArray(cambiosActuales, {idNota: idnota, nota: this.value, idPM: idPM, idPeriodo: idPeriodo}); 
-              //     botonEditar.dataset.changes = JSON.stringify(cambiosActuales);
-              //     botonEditar.disabled = false; 
+                if(this.value != nota){
+                  let cambiosActuales = JSON.parse(botonEditar.dataset.changes) ;
+                  validarArray(cambiosActuales, {idNota: idnota, nota: this.value, idPM: idPM, idPeriodo: idPeriodo}); 
+                  botonEditar.dataset.changes = JSON.stringify(cambiosActuales);
+                  botonEditar.disabled = false; 
 
-              //   }
-              // })
+                }
+              })
 
               td_nota.appendChild(input_nota);
               tr.appendChild(td_nota);
@@ -112,23 +112,23 @@ let tbody = document.querySelector(".tbodyNotas")
        botonEditar.classList.add("buttonEditar");
        botonEditar.innerHTML = "Guardar";
        botonEditar.disabled=true;
-      //  botonEditar.addEventListener('click',function(){
-      //    if (habilitar){
-      //     let cambios = JSON.parse(this.dataset.changes);
-      //     cambios.forEach(function(item){
-      //      if(!!item.idNota){
-      //        Editar(item);
-      //        botonEditar.disabled=true;
-      //      }else{
-      //        Agregar(item);
-      //      }
-      //     })
-      //    }else{
-      //      alertify.error("Rellene los datos correctamente")
-      //    }
+       botonEditar.addEventListener('click',function(){
+         if (habilitar){
+          let cambios = JSON.parse(this.dataset.changes);
+          cambios.forEach(function(item){
+           if(!!item.idNota){
+             Editar(item);
+             botonEditar.disabled=true;
+           }else{
+             Agregar(item);
+           }
+          })
+         }else{
+           alertify.error("Rellene los datos correctamente")
+         }
         
             
-      //  });
+       });
 
        let acciones = crearTd("");
        acciones.appendChild(botonEditar)

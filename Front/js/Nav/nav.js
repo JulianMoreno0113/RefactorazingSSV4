@@ -8,7 +8,6 @@ import {listarAlumno}  from "../../assets/JavaScript/reportes.js"
 import * as validacion from "../../assets/JavaScript/validaciones.js";
 
 
-validacion.ejemplo()
 
 export const crearNav = function(){
 
@@ -52,4 +51,5 @@ export const crearNav = function(){
         htmlListas.forEach(agregarAlUl);
         
         return nav;
+        
 }

@@ -1,6 +1,7 @@
 import * as inputs from "../formulariosCrud/inputs.js";
 import * as tablas from "../tablas/tablas.js";
 import {listarThead} from "../../assets/JavaScript/Notas.js";
+import * as validaciones from "../../assets/JavaScript/validaciones.js";
 
 export const crearEnlaces = function ({ texto, cargar, icono, data, submenus }) {
   const li = s5("<li>");
@@ -27,10 +28,11 @@ export const crearEnlaces = function ({ texto, cargar, icono, data, submenus }) 
     }else{ 
       inputs.crearInputsFormularios(data, texto);
       tablas.crearTablasFormularios(texto, data, cargar);
+      validaciones.ejemplo()
     }
    
   });
-
+  
   return li;
 };
 
