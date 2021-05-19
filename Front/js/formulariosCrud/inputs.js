@@ -1,6 +1,6 @@
 import * as validacion from "../../assets/JavaScript/validaciones.js";
-
-export const crearInputsFormularios = function (elementos) {
+import * as texto from "../tablas/tablas.js";
+export const crearInputsFormularios = function (elementos,texto) {
   
   
   const contenedorSection = document.querySelector(".contenedorSection");
@@ -13,7 +13,7 @@ export const crearInputsFormularios = function (elementos) {
 
   const tituloForm = document.createElement("h1");
   tituloForm.classList.add("tituloForm");
-  tituloForm.append("Agregar");
+  tituloForm.append("Agregar "+texto);
   seccionFormulario.append(tituloForm);
 
   const formulario = document.createElement("form");
