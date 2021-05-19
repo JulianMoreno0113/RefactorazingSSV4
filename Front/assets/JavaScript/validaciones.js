@@ -58,7 +58,7 @@ export const ejemplo = () => {
        }
        inputs.forEach(input => {
               input.addEventListener('blur', validarFormulario);
-              //input.addEventListener('keyup', validarFormulario);
+              input.addEventListener('keyup', validarFormulario);
        });
 
 }
