@@ -1,3 +1,4 @@
+const tabla = document.querySelector(".tbody");
 const boton = document.getElementById("btnAgregar");
 const btnGuardarMateria = document.getElementById("btnEditar");
 
@@ -26,7 +27,7 @@ const urlHost = "http://127.0.0.1:5500";
 
 //http://127.0.0.1:5500/Front/views/alumnos.html
 
-export function listarPersona(tbody,tipoPersona) {
+export function listarPersona() {
   EjecutarPeticionServidor(
     "Personas/ConsultarTodo",
     "GET",
@@ -35,30 +36,29 @@ export function listarPersona(tbody,tipoPersona) {
       personas.forEach((persona) => {
         if (
           persona.Tp_Id == 1 &&
-          tipoPersona ==1 
+          htmlLocation == urlHost + "/Front/views/alumnos.html"
         ) {
-          llenarTablaPersona(persona,tbody);
+          llenarTablaPersona(persona);
         } else if (
           persona.Tp_Id == 2 &&
-          tipoPersona ==2 
+          htmlLocation == urlHost + "/Front/views/maestros.html"
         ) {
-          llenarTablaPersona(persona,tbody);
+          llenarTablaPersona(persona);
         }
       });
     }
   );
 }
 
-function llenarTablaPersona(p,tabla) {
+function llenarTablaPersona(p) {
   let profe = document.createElement("tr");
-  profe.innerHTML += `
+  profe.innerHTML += `<td> ${p.NDoc} </td>
   <td>  ${p.Nombres} </td>
   <td>  ${p.Apellidos} </td>
-  <td> ${p.NDoc} </td>
   <td>  ${p.TDoc_Id == 1 ? "CC" : "TI"}  </td>
   <td >  ${p.Activo ? "Activo" : "Inactivo"}  </td>`;
 	profe.innerHTML += `<td class="tdBoton ">
-  <button class="buttonEditar " onclick="AbrirEditar"
+  <button class="btnEditar"onclick="AbrirEditar
 	(${p.Id},
 	${p.NDoc},
 	'${p.Nombres}',
@@ -69,7 +69,7 @@ function llenarTablaPersona(p,tabla) {
   <button class="buttonEliminar" onclick="ConfirmarEliminar(${p.Id})">Eliminar</button></td>`;
   profe.setAttribute("data-id", p.Id);
   tabla.appendChild(profe);
-  // inputNombre.value = "";
+  inputNombre.value = "";
 }
 
 function Capitalize(name) {

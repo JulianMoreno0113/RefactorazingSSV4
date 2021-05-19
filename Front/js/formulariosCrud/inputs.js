@@ -66,8 +66,7 @@ export const crearInputsFormularios = function (elementos,texto) {
 
       contenedorInputs.append(divSelect);
 
-    } else if(elementos[i] === "Estado") {
-    }else {
+    } else {
       grupo_nombre = document.createElement("div");
       grupo_nombre.classList.add("formulario__grupo");
       grupo_nombre.id = "grupo__" + elementos[i];
