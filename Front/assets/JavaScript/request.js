@@ -26,3 +26,4 @@ function EjecutarPeticionServidor(
       callback.call(window, data);
     });
 }
+

@@ -45,7 +45,6 @@ const arrayMaterias = [];
 
 //visualizarInformación
  function llenarTabla(materia,tabla) {
-  console.log(tabla)
   let filaMateria = document.createElement("tr");
 
   filaMateria.innerHTML += "<td>" + materia.Nombre + "</td>";

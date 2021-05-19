@@ -1,6 +1,6 @@
 import * as validacion from "../../assets/JavaScript/validaciones.js";
-
-export const crearInputsFormularios = function (elementos) {
+import * as texto from "../tablas/tablas.js";
+export const crearInputsFormularios = function (elementos,texto) {
   
   
   const contenedorSection = document.querySelector(".contenedorSection");
@@ -13,7 +13,7 @@ export const crearInputsFormularios = function (elementos) {
 
   const tituloForm = document.createElement("h1");
   tituloForm.classList.add("tituloForm");
-  tituloForm.append("Agregar");
+  tituloForm.append("Agregar "+texto);
   seccionFormulario.append(tituloForm);
 
   const formulario = document.createElement("form");
@@ -70,7 +70,7 @@ export const crearInputsFormularios = function (elementos) {
     }else {
       grupo_nombre = document.createElement("div");
       grupo_nombre.classList.add("formulario__grupo");
-      grupo_nombre.id = "grupo_" + elementos[i];
+      grupo_nombre.id = "grupo__" + elementos[i];
 
       const nombreLabel = document.createElement("label");
       nombreLabel.for = elementos[i];
@@ -97,6 +97,7 @@ export const crearInputsFormularios = function (elementos) {
         "fas",
         "fa-times-circle"
       );
+      grupo_nombre.append(iconoNombre)
       inputNombreDiv.append(inputNombre);
 
       const pNombre = document.createElement("p");
@@ -121,8 +122,6 @@ export const crearInputsFormularios = function (elementos) {
   const hr = document.createElement("hr");
   seccionFormulario.append(hr);
   divBotonAgregar.append(botonAgregar);
-  
 
   return contenedorSection;
 };
-validacion.ejemplo();
