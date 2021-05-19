@@ -19,30 +19,30 @@ export const crearNav = function(){
         ul.classList.add("menu");
         nav.append(ul);
 
-
         const listaEnlaces = [
-            {texto:"inicio",icono:"home 1.svg"},
-            {texto:"Alumnos",icono:"sombrero-de-graduacion 1.svg",  data:[
-                "nombre",
-                "apellido",
-                "numeroDoc",
-                "tipoDoc"
-              ]},
-            {texto:"Docentes",icono:"aula 1.svg", data:[
-                "nombre",
-                "apellido",
-                "numeroDoc",
-                "tipoDoc"
-              ]},
-            {texto:"Materias", cargar:listarMateria,icono:"libro 1.svg", data:["nombre"], submenus:[
-                {texto:"Alumno",cargar:ListarPeriodo,icono:"periodos.svg", data:["nombre", "porcentaje"]},
-                {texto:"Profesor",cargar:ListarPeriodo,icono:"periodos.svg", data:["nombre", "porcentaje"]}
+          {texto:"inicio",icono:"home 1.svg"},
+          {texto:"Alumnos",cargar:listarPersona, icono:"sombrero-de-graduacion 1.svg",  data:[
+              "Nombre",
+              "Apellidos",
+              "NumeroDoc",
+              "TipoDoc",
+              "Estado"
             ]},
-            {texto:"Notas",cargar:listarThead,icono:"los-grados 1.svg",data:[""]},
-            {texto:"Periodos",cargar:ListarPeriodo,icono:"periodos.svg", data:["nombre", "porcentaje"]},
-            {texto:"Reportes",icono:"lista-de-verificacion 1.svg"}
-        ];
-
+          {texto:"Docentes",cargar:listarPersona,icono:"aula 1.svg", data:[
+              "Nombre",
+              "Apellidos",
+              "NumeroDoc",
+              "TipoDoc",
+              "Estado"
+            ]},
+          {texto:"Materias", cargar:listarMateria,icono:"libro 1.svg", data:["Nombre"], submenus:[
+              {texto:"Alumno",cargar:ListarPeriodo,icono:"periodos.svg", data:["Nombre", "Porcentaje"]},
+              {texto:"Profesor",cargar:ListarPeriodo,icono:"periodos.svg", data:["Nombre", "Porcentaje"]}
+          ]},
+          {texto:"Notas",cargar:listarThead,icono:"los-grados 1.svg",data:[""]},
+          {texto:"Periodos",cargar:ListarPeriodo,icono:"periodos.svg", data:["Nombre", "Porcentaje"]},
+          {texto:"Reportes",icono:"lista-de-verificacion 1.svg"}
+      ];
         const htmlListas = listaEnlaces.map(enlaces.crearEnlaces);
 
         const agregarAl = padre => (el)=> padre.append(el);

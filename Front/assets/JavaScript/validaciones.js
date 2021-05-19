@@ -22,14 +22,14 @@ export const ejemplo = () => {
 
        const validarFormulario = (e) => {
               switch (e.target.name) {
-                     case "nombre":
-                            validarCampo(expresiones.nombre, e.target, 'nombre')
+                     case "Nombre":
+                            validarCampo(expresiones.nombre, e.target, 'Nombre')
                             break;
-                     case "apellido":
-                            validarCampo(expresiones.apellido, e.target, 'apellido')
+                     case "Apellido":
+                            validarCampo(expresiones.apellido, e.target, 'Apellido')
                             break;
-                     case "documento":
-                            validarCampo(expresiones.documento, e.target, 'documento')
+                     case "Documento":
+                            validarCampo(expresiones.documento, e.target, 'Documento')
                             break;
               }
        }

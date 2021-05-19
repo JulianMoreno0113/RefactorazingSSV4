@@ -42,8 +42,13 @@ export const crearTablasFormularios = await function(texto,objeto, cargar){
      const tbody=document.createElement("tbody");
      tbody.classList.add("tbody");
      tabla.append(tbody)
-     cargar(tbody);
-
+     if (texto == "Alumnos") {
+          cargar(tbody, 1)
+     } else if (texto == "Docentes") {
+          cargar(tbody, 2)
+     } else {
+          cargar(tbody);
+     }
      
      seccionTabla.append(tabla)
      document.querySelector(".contenedorSection").append(seccionTabla);  

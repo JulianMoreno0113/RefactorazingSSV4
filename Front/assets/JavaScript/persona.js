@@ -1,4 +1,3 @@
-const tabla = document.querySelector(".tbody");
 const boton = document.getElementById("btnAgregar");
 const btnGuardarMateria = document.getElementById("btnEditar");
 
@@ -17,17 +16,7 @@ let htmlLocation = window.location;
 
 const urlHost = "http://127.0.0.1:5500";
 
-//   boton.addEventListener("click", () => {
-//   inputNombre = document.getElementById("nombre").value;
-//   inputApellido = document.getElementById("apellido").value;
-//   inputTipo = parseInt(document.getElementById("tipoId").value);
-//   inputDocumento = document.getElementById("documento").value;
-//   Agregar(inputNombre, inputApellido, inputTipo, inputDocumento);
-// });
-
-//http://127.0.0.1:5500/Front/views/alumnos.html
-
-export function listarPersona() {
+export function listarPersona(tbody,tipoPersona) {
   EjecutarPeticionServidor(
     "Personas/ConsultarTodo",
     "GET",
@@ -36,21 +25,21 @@ export function listarPersona() {
       personas.forEach((persona) => {
         if (
           persona.Tp_Id == 1 &&
-          htmlLocation == urlHost + "/Front/views/alumnos.html"
+          tipoPersona ==1 
         ) {
-          llenarTablaPersona(persona);
+          llenarTablaPersona(persona,tbody);
         } else if (
           persona.Tp_Id == 2 &&
-          htmlLocation == urlHost + "/Front/views/maestros.html"
+          tipoPersona ==2 
         ) {
-          llenarTablaPersona(persona);
+          llenarTablaPersona(persona,tbody);
         }
       });
     }
   );
 }
 
-function llenarTablaPersona(p) {
+function llenarTablaPersona(p,tabla) {
   let profe = document.createElement("tr");
   profe.innerHTML += `<td> ${p.NDoc} </td>
   <td>  ${p.Nombres} </td>
@@ -69,7 +58,6 @@ function llenarTablaPersona(p) {
   <button class="buttonEliminar" onclick="ConfirmarEliminar(${p.Id})">Eliminar</button></td>`;
   profe.setAttribute("data-id", p.Id);
   tabla.appendChild(profe);
-  inputNombre.value = "";
 }
 
 function Capitalize(name) {
