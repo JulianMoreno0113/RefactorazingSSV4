@@ -1,9 +1,8 @@
 import * as validacion from "../../assets/JavaScript/validaciones.js";
 import * as texto from "../tablas/tablas.js";
 import * as modal from "../modal/modales.js";
-
-export const crearInputsFormularios = function (elementos,texto) {
   
+export const crearInputsFormularios = function (elementos,texto,agregar,cargar) {
   const contenedorSection = document.querySelector(".contenedorSection");
   contenedorSection.innerHTML = "";
 
@@ -121,6 +120,10 @@ export const crearInputsFormularios = function (elementos,texto) {
   botonAgregar.type = "button";
   botonAgregar.value = "Agregar";
   botonAgregar.id = "btnAgregar";
+  botonAgregar.addEventListener('click',function(e){
+    agregar(e);
+  })
+
 
   const hr = document.createElement("hr");
   seccionFormulario.append(hr);
@@ -129,4 +132,5 @@ export const crearInputsFormularios = function (elementos,texto) {
   
   contenedorSection.append(modal.crearModal(elementos,texto))
   return contenedorSection;
+  
 };

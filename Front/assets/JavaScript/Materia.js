@@ -21,27 +21,28 @@ console.log(inputId)
   });
 }
 
-// boton.addEventListener("click", (e) => {
-//   if (
-//     arrayMaterias.some((materias) => inputNombre.value == materias) ||
-//     inputNombre.value == "" ||
-//     inputNombre.value == null ||
-//     inputNombre.value == undefined
-//   ) {
-//     e.preventDefault();
-//     swal(
-//       "¡Transaccion Fallida! ",
-//       "Campos Vacios",
-//       "error"
-//     );
-//     inputNombre.value = "";
-//   } else {
-//     e.preventDefault();
-//     Agregar(inputNombre.value),
-//       swal("¡Transaccion Exitosa! ", "-Has Agregado un Materia", "success");
-//     inputNombre.value = "";
-//   }
-// });
+export function BotonAgregarEventListener (e)  {
+  const inputNombre = document.getElementById("Nombre");
+  if (
+    arrayMaterias.some((materias) => inputNombre.value == materias) ||
+    inputNombre.value == "" ||
+    inputNombre.value == null ||
+    inputNombre.value == undefined
+  ) {
+    e.preventDefault();
+    swal(
+      "¡Transaccion Fallida! ",
+      `-Campos Vacios o
+      -Campos repetidos`,
+      "error"
+    );
+  } else {
+    e.preventDefault();
+    Agregar(inputNombre.value),
+      swal("¡Transaccion Exitosa! ", "-Has Agregado un Materia", "success");
+    inputNombre.value = "";
+  }
+};
 
 //visualizarInformación
  function llenarTabla(materia,tabla) {
@@ -120,10 +121,10 @@ function Eliminar(id) {
     Id: parseInt(id) 
   },function(data){
     let tr = document.querySelector(`tr[data-id="${id}"]`);
-    tabla.removeChild(tr);
+    document.querySelector(".tbody").removeChild(tr);
   });
 }
-function ConfirmarEliminar(id) {
+export function ConfirmarEliminar(id) {
   swal({
     title: "Esta seguro de eliminar el alumno?",
     text: "No podra recuperar la información del alumno si lo elimina",
