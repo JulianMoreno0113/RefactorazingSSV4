@@ -23,7 +23,10 @@ export const crearEnlaces = function ({ texto, cargar, icono, data, submenus ,ag
   }
 
   li.addEvent("click", () => {
-    if (texto == "Notas") {
+    if(texto=="Inicio"){
+      inicio.PaginaDeInicio();
+    }
+    else if (texto == "Notas") {
       const contenedorSection = document.querySelector(".contenedorSection");
       contenedorSection.innerHTML = "";
       tablas.tablaNotas();

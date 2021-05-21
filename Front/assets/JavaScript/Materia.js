@@ -51,7 +51,6 @@ export function BotonAgregarEventListener (e)  {
   filaMateria.innerHTML += `<td class="tdBoton "><button class="buttonEditar "onclick="AbrirEditar(${materia.Id},'${materia.Nombre}')">Editar</button>
     <button id="btnEliminar${materia.Id}" class=" buttonEliminar">Eliminar</button></td>`;
   document.querySelector(".tbody").appendChild(filaMateria);
-  console.log(document.querySelector(".buttonEliminar"))
     document.getElementById("btnEliminar"+materia.Id).addEventListener('click',()=>{
       ConfirmarEliminar(materia.Id)
     })
