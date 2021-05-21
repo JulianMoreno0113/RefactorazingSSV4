@@ -200,4 +200,4 @@ function ConfirmarEliminar(id) {
     }
   });
 }
-listarPersona();
+// listarPersona();

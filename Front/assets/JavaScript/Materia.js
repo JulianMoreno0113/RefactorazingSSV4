@@ -5,7 +5,6 @@ const inputNombre = document.getElementById("nombre");
 const inputId = document.getElementById("idMateria");
 const btnGuardarMateria = document.getElementById("ButtonAddEditar");
 const arrayMaterias = [];
-console.log(inputId)
 // btnGuardarMateria.addEventListener("click", () => {
 //   Editar(inputId.value, nombreEditar.value);
 // });
@@ -144,4 +143,4 @@ export function ConfirmarEliminar(id) {
   });
 }
 
-listarMateria();
+// listarMateria();

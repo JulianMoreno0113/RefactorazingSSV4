@@ -159,7 +159,7 @@ function Editar(item) {
   })
 }
 
-listarThead("Periodoes");
+// listarThead("Periodoes");
 
 
 

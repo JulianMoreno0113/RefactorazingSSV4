@@ -167,4 +167,4 @@ function validarPorcentaje(porcentajePeriodo){
   }
 }
 
-ListarPeriodo();
+// ListarPeriodo();

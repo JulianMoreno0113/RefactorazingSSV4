@@ -18,10 +18,9 @@ function llenarTabla(p,tabla) {
 	 <button class="fas fa-trash-alt buttonVerReporte" onclick="AbrirReporte(${p.Id})">Ver reporte</button></td>`;
 	alumno.setAttribute("data-id", p.Id);
 	tabla.appendChild(alumno);
-	console.clear();
 }
 
 export function AbrirReporte(id) {
 	window.open("reporte.html?id=" + id, "_blank");
 }
-listarAlumno();
+// listarAlumno();
