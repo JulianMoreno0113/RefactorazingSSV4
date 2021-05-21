@@ -1,12 +1,12 @@
-
+import * as modal from "../../js/modal/modales.js"
 
 const boton = document.getElementById("ButtonAdd");
-// const inputNombre = document.getElementById("nombre");
-// const inputId = document.getElementById("idMateria");
-// const nombreEditar = document.getElementById("nombreEditar");
+const inputNombre = document.getElementById("nombre");
+const inputId = document.getElementById("idMateria");
+const nombreEditar = document.getElementById("nombreEditar");
 const btnGuardarMateria = document.getElementById("ButtonAddEditar");
 const arrayMaterias = [];
-
+console.log(inputId)
 // btnGuardarMateria.addEventListener("click", () => {
 //   Editar(inputId.value, nombreEditar.value);
 // });
@@ -46,11 +46,30 @@ const arrayMaterias = [];
 //visualizarInformación
  function llenarTabla(materia,tabla) {
   let filaMateria = document.createElement("tr");
+  filaMateria.setAttribute("data-id", materia.Id); 
 
-  filaMateria.innerHTML += "<td>" + materia.Nombre + "</td>";
-  filaMateria.setAttribute("data-id", materia.Id);
-  filaMateria.innerHTML += `<td class="tdBoton "><button class="buttonEditar "onclick="AbrirEditar(${materia.Id},'${materia.Nombre}')">Editar</button>
-    <button class=" buttonEliminar" onclick="ConfirmarEliminar(${materia.Id})">Eliminar</button></td>`;
+  const tdNombreMateria = document.createElement("td");
+  tdNombreMateria.innerHTML = materia.Nombre;
+  filaMateria.append(tdNombreMateria)
+  
+  const tdBotones = document.createElement("td");
+  tdBotones.classList.add("tdBoton");
+  filaMateria.append(tdBotones);
+
+  const botonEditar = document.createElement("button");
+  botonEditar.classList.add("buttonEditar");
+  botonEditar.innerText="Editar";
+  tdBotones.append(botonEditar);
+  botonEditar.addEventListener("click",()=>modal.AbrirEditar(materia.Id, materia.Nombre))
+
+  const botonEliminar = document.createElement("button");
+  botonEliminar.classList.add("buttonEliminar");
+  botonEliminar.innerText="Eliminar";
+  tdBotones.append(botonEliminar);
+  botonEliminar.addEventListener("click",()=>ConfirmarEliminar(materia.Id))
+
+  // filaMateria.innerHTML += `<td class="tdBoton "><button class="buttonEditar "onclick="AbrirEditar(${materia.Id},'${materia.Nombre}')">Editar</button>
+  //   <button class=" buttonEliminar" onclick="ConfirmarEliminar(${materia.Id})">Eliminar</button></td>`;
   tabla.appendChild(filaMateria);
   // inputNombre.value = "";
   // console.clear();
@@ -65,11 +84,7 @@ function Agregar(nombreMateria) {
   );
 }
 
-function AbrirEditar(id, nombre) {
-  OpenUpdate();
-  inputId.value = id;
-  nombreEditar.value = nombre;
-}
+
 
 function Editar(id, nombre) {
   if (nombre == "") {
