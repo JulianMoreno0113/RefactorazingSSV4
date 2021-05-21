@@ -20,7 +20,7 @@ export const crearNav = function(){
         nav.append(ul);
 
         const listaEnlaces = [
-          {texto:"inicio",icono:"home 1.svg"},
+          {texto:"Inicio",icono:"home 1.svg"},
           {texto:"Alumnos",cargar:listarPersona, icono:"sombrero-de-graduacion 1.svg",  data:[
               "Nombre",
               "Apellidos",

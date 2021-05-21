@@ -2,6 +2,8 @@ import * as inputs from "../formulariosCrud/inputs.js";
 import * as tablas from "../tablas/tablas.js";
 import { listarThead } from "../../assets/JavaScript/Notas.js";
 import * as validaciones from "../../assets/JavaScript/validaciones.js";
+import * as inicio from "../Principal/paginaDeInicio.js"
+
 
 
 export const crearEnlaces = function ({ texto, cargar, icono, data, submenus ,agregar}) {
