@@ -3,7 +3,6 @@ import * as modal from "../../js/modal/modales.js"
 const boton = document.getElementById("ButtonAdd");
 const inputNombre = document.getElementById("nombre");
 const inputId = document.getElementById("idMateria");
-const nombreEditar = document.getElementById("nombreEditar");
 const btnGuardarMateria = document.getElementById("ButtonAddEditar");
 const arrayMaterias = [];
 console.log(inputId)
@@ -71,7 +70,7 @@ export function BotonAgregarEventListener (e)  {
 
   // filaMateria.innerHTML += `<td class="tdBoton "><button class="buttonEditar "onclick="AbrirEditar(${materia.Id},'${materia.Nombre}')">Editar</button>
   //   <button class=" buttonEliminar" onclick="ConfirmarEliminar(${materia.Id})">Eliminar</button></td>`;
-  tabla.appendChild(filaMateria);
+  document.querySelector(".tbody").appendChild(filaMateria);
   // inputNombre.value = "";
   // console.clear();
 }
@@ -87,7 +86,9 @@ function Agregar(nombreMateria) {
 
 
 
-function Editar(id, nombre) {
+export function Editar() {
+  const nombre = document.getElementById("nombreEditar").value;
+  const id = document.getElementById("idMateria").value;
   if (nombre == "") {
     swal("¡Transaccion Fallida! ", "Campos Vacios", "error");
     return false;

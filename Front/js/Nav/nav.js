@@ -34,7 +34,7 @@ export const crearNav = function(){
           {texto:"Materias", cargar:materia.listarMateria,icono:"libro 1.svg", data:["Nombre"], submenus:[
               {texto:"Alumno",cargar:ListarPeriodo,icono:"periodos.svg", data:["Nombre", "Porcentaje"]},
               {texto:"Profesor",cargar:ListarPeriodo,icono:"periodos.svg", data:["Nombre", "Porcentaje"]}
-          ],agregar:materia.BotonAgregarEventListener},
+          ],agregar:materia.BotonAgregarEventListener,editar:materia.Editar},
           {texto:"Notas",cargar:listarThead,icono:"los-grados 1.svg",data:[""]},
           {texto:"Periodos",cargar:ListarPeriodo,icono:"periodos.svg", data:["Nombre", "Porcentaje"]},
           {texto:"Reportes",cargar:listarAlumno,icono:"lista-de-verificacion 1.svg",data:["Nombre del estudiante","Identificación"]}

@@ -7,7 +7,7 @@ import * as inicio from "../Principal/paginaDeInicio.js"
 
 
 
-export const crearEnlaces = function ({ texto, cargar, icono, data, submenus ,agregar}) {
+export const crearEnlaces = function ({ texto, cargar, icono, data, submenus ,agregar,editar}) {
   const li = s5("<li>");
   const img = s5("<img>", { src: "assets/icons/" + icono });
 
@@ -36,7 +36,7 @@ export const crearEnlaces = function ({ texto, cargar, icono, data, submenus ,ag
       contenedorSection.innerHTML = "";
       tablas.crearTablasFormularios(texto, data, cargar);
     } else {
-      inputs.crearInputsFormularios(data, texto,agregar);
+      inputs.crearInputsFormularios(data, texto,agregar,editar);
       tablas.crearTablasFormularios(texto, data, cargar);
       validaciones.ejemplo()
     }

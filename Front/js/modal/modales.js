@@ -1,6 +1,6 @@
 import * as texto from "../tablas/tablas.js";
 import * as funcionModal  from "../../assets/JavaScript/funcionModal.js"
-export const crearModal = await function(elementos,texto){
+export const crearModal = await function(elementos,texto,editar){
 
     const sectionModal = document.createElement("section");
     sectionModal.classList.add("sectionModal");
@@ -65,7 +65,9 @@ export const crearModal = await function(elementos,texto){
         inputGuardar.setAttribute("value","Guardar Cambios");
         inputGuardar.classList.add("guardarCambios");
         inputGuardar.id="ButtonAddEditar";
-        // inputGuardar.addEventListener("click",)   
+        inputGuardar.addEventListener("click",function(){
+            editar();
+        })   
         divButtonsEditar.append(inputGuardar);
         formularioModal.append(divButtonsEditar);
 
