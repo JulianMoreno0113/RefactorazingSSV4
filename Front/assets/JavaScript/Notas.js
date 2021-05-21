@@ -28,8 +28,8 @@ export async function listarNotas(arrayperiodos) {
 }
 
 function theadperiodos(periodos) {
-  let thead = document.querySelector(".theadNotas")
-  let html = " "
+  let thead = document.querySelector(".theadNotas");
+  thead.innerHTML = "";
   function crearTh(texto) {
     let td = document.createElement("th");
     td.innerHTML=texto;
@@ -66,8 +66,9 @@ function llenarTabla(notas, periodos) {
     td.innerHTML=texto;
     return td;
   }
-   let html = " ";
+  
 let tbody = document.querySelector(".tbodyNotas")
+tbody.innerHTML ="";
    for (let i = 0; i < notas.length; i++) {
       let tr = document.createElement("tr");
       tr.setAttribute("data-id",notas[i].idPM);

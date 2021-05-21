@@ -8,7 +8,7 @@ export const crearTablasFormularios = await function(texto,objeto, cargar){
      encabezado.classList.add("encabezadoTabla")
      seccionTabla.append(encabezado)
 
-     const tituloTabla = document.createElement("h1")
+     const tituloTabla = document.createElement("h2")
      tituloTabla.classList.add("tituloTabla")
      tituloTabla.innerText="Gestionar "+ texto ;
      encabezado.append(tituloTabla)
@@ -62,7 +62,7 @@ const encabezado = document.createElement("div")
 encabezado.classList.add("encabezadoTabla")
 seccionTabla.append(encabezado)
 
-const tituloTabla = document.createElement("h1")
+const tituloTabla = document.createElement("h2")
 tituloTabla.classList.add("tituloTabla")
 tituloTabla.innerText="Gestionar Notas";
 encabezado.append(tituloTabla)
