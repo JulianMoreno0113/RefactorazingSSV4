@@ -1,12 +1,12 @@
 import * as enlaces from "./links.js"
-import {listarMateria}  from "../../assets/JavaScript/Materia.js"
+import * as materia  from "../../assets/JavaScript/Materia.js"
 import {ListarPeriodo}  from "../../assets/JavaScript/Periodos.js"
 import {listarPersona}  from "../../assets/JavaScript/persona.js"
 import {consultar}   from "../../assets/JavaScript/AsignarMateriasPersona.js"
 import {listarThead}  from "../../assets/JavaScript/Notas.js"
 import {listarAlumno}  from "../../assets/JavaScript/reportes.js"
 import * as validacion from "../../assets/JavaScript/validaciones.js";
-
+import {AbrirReporte}  from "../../assets/JavaScript/reportes.js"
 
 
 export const crearNav = function(){
@@ -35,13 +35,13 @@ export const crearNav = function(){
               "TipoDoc",
               "Estado"
             ]},
-          {texto:"Materias", cargar:listarMateria,icono:"libro 1.svg", data:["Nombre"], submenus:[
+          {texto:"Materias", cargar:materia.listarMateria,icono:"libro 1.svg", data:["Nombre"], submenus:[
               {texto:"Alumno",cargar:ListarPeriodo,icono:"periodos.svg", data:["Nombre", "Porcentaje"]},
               {texto:"Profesor",cargar:ListarPeriodo,icono:"periodos.svg", data:["Nombre", "Porcentaje"]}
-          ]},
+          ],agregar:materia.BotonAgregarEventListener},
           {texto:"Notas",cargar:listarThead,icono:"los-grados 1.svg",data:[""]},
           {texto:"Periodos",cargar:ListarPeriodo,icono:"periodos.svg", data:["Nombre", "Porcentaje"]},
-          {texto:"Reportes",icono:"lista-de-verificacion 1.svg"}
+          {texto:"Reportes",cargar:listarAlumno,icono:"lista-de-verificacion 1.svg",data:["Nombre del estudiante","Identificación"]}
       ];
         const htmlListas = listaEnlaces.map(enlaces.crearEnlaces);
 
@@ -53,3 +53,4 @@ export const crearNav = function(){
         return nav;
         
 }
+

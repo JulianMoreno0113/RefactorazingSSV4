@@ -1,10 +1,8 @@
+export const boton = document.getElementById("btnAgregar");
 
-
-const boton = document.getElementById("ButtonAdd");
-// const inputNombre = document.getElementById("nombre");
 // const inputId = document.getElementById("idMateria");
 // const nombreEditar = document.getElementById("nombreEditar");
-const btnGuardarMateria = document.getElementById("ButtonAddEditar");
+// const btnGuardarMateria = document.getElementById("ButtonAddEditar");
 const arrayMaterias = [];
 
 // btnGuardarMateria.addEventListener("click", () => {
@@ -21,27 +19,28 @@ const arrayMaterias = [];
   });
 }
 
-// boton.addEventListener("click", (e) => {
-//   if (
-//     arrayMaterias.some((materias) => inputNombre.value == materias) ||
-//     inputNombre.value == "" ||
-//     inputNombre.value == null ||
-//     inputNombre.value == undefined
-//   ) {
-//     e.preventDefault();
-//     swal(
-//       "¡Transaccion Fallida! ",
-//       "Campos Vacios",
-//       "error"
-//     );
-//     inputNombre.value = "";
-//   } else {
-//     e.preventDefault();
-//     Agregar(inputNombre.value),
-//       swal("¡Transaccion Exitosa! ", "-Has Agregado un Materia", "success");
-//     inputNombre.value = "";
-//   }
-// });
+export function BotonAgregarEventListener (e)  {
+  const inputNombre = document.getElementById("Nombre");
+  if (
+    arrayMaterias.some((materias) => inputNombre.value == materias) ||
+    inputNombre.value == "" ||
+    inputNombre.value == null ||
+    inputNombre.value == undefined
+  ) {
+    e.preventDefault();
+    swal(
+      "¡Transaccion Fallida! ",
+      `-Campos Vacios o
+      -Campos repetidos`,
+      "error"
+    );
+  } else {
+    e.preventDefault();
+    Agregar(inputNombre.value),
+      swal("¡Transaccion Exitosa! ", "-Has Agregado un Materia", "success");
+    inputNombre.value = "";
+  }
+};
 
 //visualizarInformación
  function llenarTabla(materia,tabla) {
@@ -50,8 +49,12 @@ const arrayMaterias = [];
   filaMateria.innerHTML += "<td>" + materia.Nombre + "</td>";
   filaMateria.setAttribute("data-id", materia.Id);
   filaMateria.innerHTML += `<td class="tdBoton "><button class="buttonEditar "onclick="AbrirEditar(${materia.Id},'${materia.Nombre}')">Editar</button>
-    <button class=" buttonEliminar" onclick="ConfirmarEliminar(${materia.Id})">Eliminar</button></td>`;
-  tabla.appendChild(filaMateria);
+    <button id="btnEliminar${materia.Id}" class=" buttonEliminar">Eliminar</button></td>`;
+  document.querySelector(".tbody").appendChild(filaMateria);
+  console.log(document.querySelector(".buttonEliminar"))
+    document.getElementById("btnEliminar"+materia.Id).addEventListener('click',()=>{
+      ConfirmarEliminar(materia.Id)
+    })
   // inputNombre.value = "";
   // console.clear();
 }
@@ -105,10 +108,10 @@ function Eliminar(id) {
     Id: parseInt(id) 
   },function(data){
     let tr = document.querySelector(`tr[data-id="${id}"]`);
-    tabla.removeChild(tr);
+    document.querySelector(".tbody").removeChild(tr);
   });
 }
-function ConfirmarEliminar(id) {
+export function ConfirmarEliminar(id) {
   swal({
     title: "Esta seguro de eliminar el alumno?",
     text: "No podra recuperar la información del alumno si lo elimina",

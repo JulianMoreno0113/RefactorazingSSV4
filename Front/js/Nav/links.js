@@ -1,9 +1,10 @@
 import * as inputs from "../formulariosCrud/inputs.js";
 import * as tablas from "../tablas/tablas.js";
-import {listarThead} from "../../assets/JavaScript/Notas.js";
+import { listarThead } from "../../assets/JavaScript/Notas.js";
 import * as validaciones from "../../assets/JavaScript/validaciones.js";
 
-export const crearEnlaces = function ({ texto, cargar, icono, data, submenus }) {
+
+export const crearEnlaces = function ({ texto, cargar, icono, data, submenus ,agregar}) {
   const li = s5("<li>");
   const img = s5("<img>", { src: "assets/icons/" + icono });
 
@@ -11,32 +12,35 @@ export const crearEnlaces = function ({ texto, cargar, icono, data, submenus }) 
   li.append(texto);
 
 
-   if(submenus?.length >0)
-    {  
-      const submenu = s5("<ul>",{class: "submenu"}).insertTo(li);
-      submenus.forEach(function(menu){
-        CrearLi(submenu,menu.texto)
-      })
-      
-    }
-     
+  if (submenus ?.length > 0) {
+    const submenu = s5("<ul>", { class: "submenu" }).insertTo(li);
+    submenus.forEach(function (menu) {
+      CrearLi(submenu, menu.texto)
+    })
+
+  }
+
   li.addEvent("click", () => {
-    if(texto=="Notas"){
-      document.querySelector(".seccionTabla").innerHTML = '';
-      document.querySelector(".seccionFormulario").innerHTML = '';
+    if (texto == "Notas") {
+      const contenedorSection = document.querySelector(".contenedorSection");
+      contenedorSection.innerHTML = "";
       tablas.tablaNotas();
-    }else{ 
-      inputs.crearInputsFormularios(data, texto);
+    } else if (texto=="Reportes") {
+      const contenedorSection = document.querySelector(".contenedorSection");
+      contenedorSection.innerHTML = "";
+      tablas.crearTablasFormularios(texto, data, cargar);
+    } else {
+      inputs.crearInputsFormularios(data, texto,agregar);
       tablas.crearTablasFormularios(texto, data, cargar);
       validaciones.ejemplo()
     }
-   
+
   });
-  
+
   return li;
 };
 
-function CrearLi(ulPapa, texto){
+function CrearLi(ulPapa, texto) {
   const liMateriaAlumno = s5("<li>").insertTo(ulPapa);
   liMateriaAlumno.append(texto);
 }
@@ -53,12 +57,13 @@ function CrearSubMenuMaterias(liPapa, texto) {
     )
     .insertTo(liPapa);
 
-  const submenu = s5("<ul>",{class: "submenu"}).insertTo(liPapa);
+  const submenu = s5("<ul>", { class: "submenu" }).insertTo(liPapa);
 
   const liMateriaAlumno = s5("<li>");
   liMateriaAlumno.append("Alumno");
 
   const liMateriaProfesor = s5("<li>");
   liMateriaProfesor.append("Profesor");
-  submenu.insert([ liMateriaAlumno , liMateriaProfesor ]);
+  submenu.insert([liMateriaAlumno, liMateriaProfesor]);
 }
+

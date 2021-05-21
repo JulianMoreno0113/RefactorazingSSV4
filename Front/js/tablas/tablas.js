@@ -1,4 +1,6 @@
 import * as notas from "../../assets/JavaScript/Notas.js"
+
+
 export const crearTablasFormularios = await function(texto,objeto, cargar){
      
      const seccionTabla = document.createElement("section")
@@ -89,4 +91,5 @@ notas.listarThead("periodoes")
 notas.listarNotas();
 seccionTabla.append(tabla)
 document.querySelector(".contenedorSection").append(seccionTabla);
+
 }
